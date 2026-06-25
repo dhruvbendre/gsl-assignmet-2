@@ -27,7 +27,8 @@ import {
   Menu,
   X,
   LogOut,
-  Wrench
+  Wrench,
+  ArrowLeft
 } from 'lucide-react';
 import { toast } from 'sonner';
 
@@ -313,6 +314,19 @@ export function Dashboard() {
       </header>
 
       <div className="max-w-7xl mx-auto px-4 py-6">
+        {/* Back to Dashboard Button */}
+        <div className="mb-4">
+          <Button
+            variant="ghost"
+            onClick={() => navigate('/dashboard')}
+            className="text-slate-600 hover:text-teal-600 hover:bg-teal-50"
+            size="sm"
+          >
+            <ArrowLeft className="w-4 h-4 mr-2" />
+            Back to Dashboard
+          </Button>
+        </div>
+
         <div className="flex gap-6">
           {/* Sidebar - Chapters */}
           <AnimatePresence>
