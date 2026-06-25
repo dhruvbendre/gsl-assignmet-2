@@ -240,7 +240,7 @@ export function Dashboard() {
   const currentComponents = course.id ? (componentsRequired[course.id] || []) : [];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-teal-50">
+    <div className="bg-gradient-to-br from-slate-50 to-teal-50 lg:min-h-screen">
       {/* Header */}
       <header className="bg-gradient-to-r from-[#0F766E] to-[#14B8A6] border-b border-teal-600 sticky top-0 z-40 shadow-lg">
         <div className="max-w-7xl mx-auto px-4 py-4">
