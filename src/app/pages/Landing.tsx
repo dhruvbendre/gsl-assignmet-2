@@ -1,4 +1,4 @@
-import { motion } from 'motion/react';
+ import { motion } from 'motion/react';
 import { useNavigate } from 'react-router';
 import { Button } from '../components/ui/button';
 import { ContainerScrollAnimation } from '../components/ui/container-scroll-animation';
