@@ -519,6 +519,9 @@ const Game = {
     // Scene 4 accepts both drag/drop and tap-to-place ordering for code blocks.
     bindCodingScene() {
         document.querySelectorAll(".code-block").forEach((block) => {
+            if (!block.dataset.originalCodeOrder) {
+                block.dataset.originalCodeOrder = String(Array.from(block.parentElement.children).indexOf(block));
+            }
             block.addEventListener("dragstart", (event) => this.startDrag(event, block));
             block.addEventListener("click", () => this.selectCodeBlock(block));
         });
@@ -571,7 +574,57 @@ const Game = {
         orderedBlocks.filter(Boolean).forEach((block) => block.classList.add("wrong"));
         window.setTimeout(() => orderedBlocks.filter(Boolean).forEach((block) => block.classList.remove("wrong")), 600);
         this.loseHeart("Wrong order!");
+        window.setTimeout(() => this.resetCodePuzzle(), 800);
         return false;
+    },
+
+    resetCodePuzzle() {
+        const source = document.getElementById("code-source");
+        const zones = Array.from(document.querySelectorAll("#code-target .drop-zone"));
+        if (!source) return;
+
+        const blocks = Array.from(document.querySelectorAll(".code-block"));
+        const firstRects = new Map(blocks.map((block) => [block, block.getBoundingClientRect()]));
+
+        this.selectedCodeBlock = null;
+        this.draggedElement = null;
+        blocks.forEach((block) => {
+            block.classList.remove("selected", "wrong");
+            block.draggable = true;
+            block.style.pointerEvents = "auto";
+        });
+
+        zones.forEach((zone) => {
+            zone.innerHTML = zone.dataset.pos || "";
+        });
+
+        blocks
+            .sort((a, b) => Number(a.dataset.originalCodeOrder || 0) - Number(b.dataset.originalCodeOrder || 0))
+            .forEach((block) => source.appendChild(block));
+
+        blocks.forEach((block) => {
+            const first = firstRects.get(block);
+            const last = block.getBoundingClientRect();
+            if (!first) return;
+
+            const deltaX = first.left - last.left;
+            const deltaY = first.top - last.top;
+            if (!deltaX && !deltaY) return;
+
+            block.style.transition = "none";
+            block.style.transform = `translate(${deltaX}px, ${deltaY}px)`;
+            block.style.pointerEvents = "none";
+
+            requestAnimationFrame(() => {
+                block.style.transition = "transform 0.32s ease";
+                block.style.transform = "";
+                window.setTimeout(() => {
+                    block.style.transition = "";
+                    block.style.pointerEvents = "auto";
+                    block.draggable = true;
+                }, 340);
+            });
+        });
     },
 
     completeCoding() {
