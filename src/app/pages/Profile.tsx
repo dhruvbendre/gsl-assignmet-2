@@ -8,7 +8,6 @@ import { Progress } from '../components/ui/progress';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '../components/ui/tabs';
 import { storage } from '../lib/storage';
 import { arduinoCourse } from '../data/arduino-course';
-import { smartStreetLightCourse } from '../data/smart-street-light';
 import { lectures } from '../data/lectures';
 import { Badge, Statistics, UserProgress } from '../types';
 import { useAuth } from '../context/AuthContext';
@@ -38,7 +37,11 @@ export function Profile() {
   const [progress, setProgress] = useState<UserProgress | null>(null);
 
   useEffect(() => {
-    setBadges(storage.getBadges(userId || undefined));
+    setBadges(
+      storage.getBadges(userId || undefined).filter((badge) =>
+        lectures.some((lecture) => badge.id === `badge-${lecture.id}` || badge.courseId === lecture.course.id)
+      )
+    );
     setStats(storage.getStatistics(userId || undefined));
     setProgress(storage.getProgress(arduinoCourse.id, userId || undefined));
   }, [userId]);

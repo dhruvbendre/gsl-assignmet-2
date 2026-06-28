@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Over</title>
+    <script src="js/game.js" defer></script>
+    <style>
+        html, body {
+            margin: 0;
+            min-height: 100%;
+            font-family: system-ui, sans-serif;
+            color: #ffffff;
+            background: #111827;
+            display: grid;
+            place-items: center;
+        }
+
+        .game-over-panel {
+            text-align: center;
+            padding: 32px;
+        }
+
+        h1 {
+            margin: 0 0 8px;
+            font-size: 42px;
+        }
+
+        p {
+            margin: 0 0 22px;
+            color: #d1d5db;
+        }
+
+        button {
+            border: 0;
+            border-radius: 8px;
+            padding: 12px 18px;
+            font-weight: 800;
+            cursor: pointer;
+        }
+    </style>
+    <link rel="stylesheet" href="src/css/game-ui.css">
+</head>
+<body>
+    <main class="game-over-panel">
+        <h1>Game Over</h1>
+        <p>Sprouty still needs you. Retry the mission with a fresh save.</p>
+        <button id="retryBtn" data-reset-game>Retry</button>
+    </main>
+</body>
+</html>

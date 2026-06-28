@@ -1,0 +1,323 @@
+/* Reset default margins and secure full layout height */
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    font-family: sans-serif;
+    user-select: none; /* Prevents text selection during rapid clicks */
+}
+
+h{
+    position: absolute;
+    top: clamp(18px, 4vh, 34px);
+    left: 50%;
+    z-index: 90;
+    max-width: min(54vw, 560px);
+    margin: 0;
+    transform: translateX(-50%);
+    color: #f8fafc;
+    font-family: "Cinzel", "Alegreya SC", "Rajdhani", serif;
+    font-size: clamp(1.1rem, 2.2vw, 2rem);
+    font-weight: 700;
+    line-height: 1.15;
+    letter-spacing: 0.08em;
+    text-align: center;
+    text-shadow: 0 3px 12px rgba(0, 0, 0, 0.95), 0 0 18px rgba(255, 47, 95, 0.5);
+}
+
+body {
+    /* Set the lab background scene as cover */
+    background-image: url('../img/Gemini_Generated_Image_szh8u0szh8u0szh8.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
+}
+
+/* Hide original HTML img tag */
+#bg-reference {
+    display: none;
+}
+
+/* Container defining the table space for scattered items */
+.table-container {
+    position: absolute;
+    bottom: 0%;
+    left: 2%;
+    width: 96%;
+    height: 65%; /* Expanded the container height slightly to give 200px items more breathing room */
+}
+
+/* Base style for every item button on the table */
+.choice-btn {
+    position: absolute;
+    background: none;             
+    border: none;                 
+    border-radius: 0;
+    padding: 0;
+    width: 210px; /* Widened to match the new 200px image dimensions and prevent text clipping */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    
+    /* Smooth transitions for moving, scaling, and rotating */
+    transition: transform 0.25s ease, opacity 0.3s ease;
+}
+
+/* Text formatting inside the buttons - Hidden by default */
+.choice-btn span {
+    color: #ffffff;
+    font-size: 1rem; /* Slightly larger text to scale nicely with the 200px items */
+    font-weight: bold;
+    margin-top: 10px;
+    text-align: center;
+    text-transform: uppercase;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.9); 
+    
+    /* Make text completely invisible until hover */
+    opacity: 0;
+    transform: translateY(5px);
+    transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+/* MASSIVE 200PX ICON SIZE */
+.choice-btn img {
+    width: 200px;  
+    height: 200px;
+    object-fit: contain;
+    transition: filter 0.2s ease;
+}
+
+/* --- HOVER STATES --- */
+.choice-btn:hover {
+    /* Snaps straight, lifts, and scales up cleanly */
+    transform: scale(1.1) translateY(-8px) rotate(0deg) !important;
+    z-index: 50; /* Forces the hovered element over everything else */
+}
+
+/* Reveal text smoothly on hover */
+.choice-btn:hover span {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Targets the actual transparent PNG outline instead of a box container */
+.choice-btn:hover img {
+    filter: drop-shadow(0px 0px 12px rgba(255, 255, 255, 0.95)) 
+            drop-shadow(0px 0px 4px rgba(255, 255, 255, 1));
+}
+
+/* Hide or fade item cleanly when collected */
+.choice-btn.collected {
+    opacity: 0 !important;
+    pointer-events: none;
+    transform: scale(0.5);
+}
+
+/* --- SCATTERING COORDINATES & UNORGANIZED ROTATIONS --- */
+/* Spread out slightly further dynamically to account for the larger footprint */
+/* --- PRECISE SCATTERING COORDINATES (NO OVERLAPS) --- */
+/* Left Side Items */
+.item-1  { top: 12%;  left: 5%;    transform: rotate(-10deg); } /* Calculator */
+.item-2  { top: 46%;  left: 5%;    transform: rotate(8deg);   } /* Bread */
+.item-3  { top: 0%;   left: 16%;   transform: rotate(-5deg);  } /* Arduino */
+.item-4  { top: 38%;  left: 20%;   transform: rotate(15deg);  } /* Toycar */
+
+/* Center Items (Clearing the gloves & papers) */
+.item-11 { top: 44%;  left: 36%;   transform: rotate(-18deg); } /* Yellow Wire */
+.item-5  { top: 0%;   left: 42%;   transform: rotate(25deg);  } /* Torch */
+.item-6  { top: 48%;  left: 50%;   transform: rotate(-12deg); } /* Spoon */
+
+/* Right Side Items (Clearing the central blueprint and bottom-right skull) */
+.item-12 { top: 0%;   left: 64%;   transform: rotate(5deg);   } /* Blueprint icon */
+.item-7  { top: 35%;  left: 66%;   transform: rotate(90deg);  } /* Sensor */
+.item-8  { top: 65%;  left: 72%;   transform: rotate(12deg);  } /* Thermometer */
+.item-9  { top: 4%;   left: 82%;   transform: rotate(20deg);  } /* Red Wire */
+.item-10 { top: 28%;  left: 74%;   transform: rotate(-8deg);  } /* Black Wire */
+
+
+/* ==========================================================================
+   ADDED INVENTORY CONFIGURATIONS FROM CSS2 (UPDATED TO TOP RIGHT)
+   ========================================================================== */
+
+/* --- INVENTORY PANEL (MOVED TO TOP RIGHT) --- */
+/* --- INVENTORY PANEL (MOVED TO TOP RIGHT & COMPACTED) --- */
+.inventory-container {
+    position: absolute;
+    top: 15px;                  /* Snugger fit against the top */
+    right: 15px;                /* Snugger fit against the right */
+    background: rgba(255, 255, 255, 0.92);
+    border: 3px solid #382b22;  /* Slightly thinner border */
+    border-radius: 12px;        /* Sleeker rounded corners */
+    padding: 6px 10px 8px 10px; /* Reduced padding */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;                   /* Tighter spacing */
+    z-index: 100;               
+}
+
+.inv-title {
+    font-size: 10px;            /* Smaller title text */
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #6d503c;
+    font-weight: bold;
+}
+
+.inv-row {
+    display: flex;
+    gap: 6px;                   /* Closer slot positioning */
+}
+
+.inv-slot {
+    width: 55px;                /* Reduced from 70px */
+    height: 55px;               /* Reduced from 70px */
+    background: #e0f2f1;
+    border: 2px dashed #382b22;  /* Thinner dashed border */
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    position: relative;
+}
+
+/* --- CLONED ITEM IMAGES INSIDE SLOTS --- */
+img.inv-item-pic {
+    width: 42px !important;     /* Scaled down down from 55px to fit beautifully */
+    height: 42px !important;
+    object-fit: contain;
+    cursor: pointer;
+    filter: drop-shadow(2px 2px 0px rgba(0, 0, 0, 0.2));
+    transition: transform 0.2s ease;
+}
+
+img.inv-item-pic:hover {
+    transform: scale(1.1) rotate(3deg);
+}
+
+/* --- GAME PROGRESS ACTION BUTTON STYLES --- */
+.scene2-action-layer {
+    position: absolute;
+    left: 2%;
+    right: 2%;
+    bottom: clamp(112px, 18vh, 176px);
+    z-index: 110;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    pointer-events: none;
+}
+
+.action-btn-hidden {
+    display: none !important;
+}
+
+.action-btn-visible {
+    position: relative;
+    background: #ffeb3b;
+    color: #382b22;
+    font-size: 18px;
+    font-weight: bold;
+    text-transform: uppercase;
+    padding: 12px 30px;
+    border: 4px solid #382b22;
+    border-radius: 50px;
+    cursor: pointer;
+    box-shadow: 0 6px 0px #382b22;
+    pointer-events: auto;
+    transition: transform 180ms cubic-bezier(0.22, 1, 0.36, 1), box-shadow 180ms cubic-bezier(0.22, 1, 0.36, 1), background-color 180ms ease;
+}
+
+.action-btn-visible:hover {
+    background: #fff176;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 0px #382b22;
+}
+
+.action-btn-visible:active {
+    transform: translateY(4px);
+    box-shadow: 0 2px 0px #382b22;
+}
+
+/* --- SMOOTH TRANSITION ANIMATIONS --- */
+.pop-in-smooth {
+    animation: itemPop 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+.fade-out-smooth {
+    animation: itemFade 0.2s ease forwards;
+}
+
+@keyframes itemPop {
+    0% { transform: scale(0); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+@keyframes itemFade {
+    0% { transform: scale(1); opacity: 1; }
+    100% { transform: scale(0); opacity: 0; }
+}
+
+/* --- Feedback Info Box --- */
+.feedback-msg {
+    position: absolute;
+    left: 50%;
+    bottom: clamp(176px, 26vh, 248px);
+    z-index: 120;
+    display: none;
+    max-width: min(360px, 86vw);
+    padding: 10px 16px;
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    border-radius: 12px;
+    background: rgba(9, 13, 16, 0.9);
+    color: #f8fafc;
+    font: 800 14px/1.3 "Courier New", monospace;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 0.7px;
+    box-shadow: 0 18px 44px rgba(0, 0, 0, 0.5), 0 0 18px rgba(255, 47, 95, 0.18);
+    pointer-events: none;
+    transform: translateX(-50%) scale(0.96);
+    opacity: 0;
+}
+
+.feedback-msg:not(:empty) {
+    display: block;
+}
+
+.feedback-msg.is-visible {
+    animation: feedbackFloat 1400ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.feedback-msg.success {
+    border-color: rgba(20, 199, 132, 0.56);
+}
+
+.feedback-msg.error {
+    border-color: rgba(255, 47, 95, 0.68);
+}
+
+.feedback-msg.info {
+    border-color: rgba(255, 235, 59, 0.48);
+}
+
+@keyframes feedbackFloat {
+    0% {
+        opacity: 0;
+        transform: translateX(-50%) translateY(8px) scale(0.96);
+    }
+    14%, 78% {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0) scale(1);
+    }
+    100% {
+        opacity: 0;
+        transform: translateX(-50%) translateY(-8px) scale(0.98);
+    }
+}

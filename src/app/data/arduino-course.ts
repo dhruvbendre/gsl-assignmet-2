@@ -52,10 +52,10 @@ export const arduinoCourse: Course = {
             options: [
               'United States',
               'Japan',
-              'Italy',
-              'China'
+              'China',
+              'Italy'
             ],
-            correctAnswer: 2,
+            correctAnswer: 3,
             explanation: 'Arduino was invented in Italy in 2005!'
           }
         ]
@@ -80,12 +80,12 @@ export const arduinoCourse: Course = {
             id: 'q2-1',
             question: 'Why is soil moisture important for plants?',
             options: [
-              'Plants don\'t need water',
               'Plants need the right amount of water to grow',
+              'Plants don\'t need water',
               'Only decorative plants need water',
               'Soil moisture doesn\'t matter'
             ],
-            correctAnswer: 1,
+            correctAnswer: 0,
             explanation: 'Plants need the perfect balance of water - not too much, not too little!'
           },
           {
@@ -93,11 +93,11 @@ export const arduinoCourse: Course = {
             question: 'What happens if soil has too much water?',
             options: [
               'Plants grow faster',
-              'Plant roots can drown',
               'Nothing happens',
+              'Plant roots can drown',
               'The soil becomes healthier'
             ],
-            correctAnswer: 1,
+            correctAnswer: 2,
             explanation: 'Too much water can drown plant roots by preventing them from getting oxygen!'
           },
           {
@@ -105,11 +105,11 @@ export const arduinoCourse: Course = {
             question: 'How does a soil moisture sensor work?',
             options: [
               'It measures temperature',
-              'It uses electrical conductivity',
               'It weighs the soil',
-              'It counts water droplets'
+              'It counts water droplets',
+              'It uses electrical conductivity'
             ],
-            correctAnswer: 1,
+            correctAnswer: 3,
             explanation: 'Soil moisture sensors use electrical conductivity - wet soil conducts electricity better than dry soil!'
           }
         ]
@@ -147,23 +147,23 @@ export const arduinoCourse: Course = {
             question: 'What does the soil moisture sensor do?',
             options: [
               'It waters the plants',
-              'It detects how wet the soil is',
               'It measures temperature',
-              'It provides power'
+              'It provides power',
+              'It detects how wet the soil is'
             ],
-            correctAnswer: 1,
+            correctAnswer: 3,
             explanation: 'The soil moisture sensor detects the wetness level of the soil!'
           },
           {
             id: 'q3-3',
             question: 'Why is a breadboard useful?',
             options: [
-              'To cut bread',
               'To practice connecting components without soldering',
+              'To cut bread',
               'To store components',
               'To power the Arduino'
             ],
-            correctAnswer: 1,
+            correctAnswer: 0,
             explanation: 'A breadboard lets you connect components temporarily without soldering, making it perfect for learning!'
           }
         ]
@@ -189,23 +189,23 @@ export const arduinoCourse: Course = {
             question: 'What does the setup() function do?',
             options: [
               'Runs continuously',
-              'Runs once at the start',
               'Stores data',
+              'Runs once at the start',
               'Turns off the Arduino'
             ],
-            correctAnswer: 1,
+            correctAnswer: 2,
             explanation: 'setup() runs once when the Arduino starts - perfect for initial configuration!'
           },
           {
             id: 'q4-2',
             question: 'What does the loop() function do?',
             options: [
-              'Runs once',
               'Runs continuously forever',
+              'Runs once',
               'Only runs when you press a button',
               'Saves your program'
             ],
-            correctAnswer: 1,
+            correctAnswer: 0,
             explanation: 'loop() runs over and over continuously - this is where your main program lives!'
           },
           {
@@ -213,11 +213,11 @@ export const arduinoCourse: Course = {
             question: 'What is pinMode() used for?',
             options: [
               'To name your Arduino',
-              'To set whether a pin is input or output',
               'To turn pins on and off',
-              'To measure voltage'
+              'To measure voltage',
+              'To set whether a pin is input or output'
             ],
-            correctAnswer: 1,
+            correctAnswer: 3,
             explanation: 'pinMode() tells Arduino whether a pin should receive information (INPUT) or send signals (OUTPUT)!'
           }
         ]
@@ -255,23 +255,23 @@ export const arduinoCourse: Course = {
             question: 'What is ground (GND) in a circuit?',
             options: [
               'The dirt outside',
-              'The common return path for electricity',
               'The top of the circuit',
+              'The common return path for electricity',
               'A broken connection'
             ],
-            correctAnswer: 1,
+            correctAnswer: 2,
             explanation: 'Ground is the common return path that completes the circuit - like the finish line all electricity returns to!'
           },
           {
             id: 'q5-3',
             question: 'Why is it important to design circuits carefully?',
             options: [
-              'It\'s not important',
               'To ensure components work safely and correctly',
+              'It\'s not important',
               'To make it look pretty',
               'To use more wires'
             ],
-            correctAnswer: 1,
+            correctAnswer: 0,
             explanation: 'Careful circuit design ensures all components get the right voltage and current to work safely!'
           }
         ]
@@ -297,23 +297,23 @@ export const arduinoCourse: Course = {
             question: 'What does VCC on the sensor mean?',
             options: [
               'Very Cold Connection',
-              'Power supply connection',
               'Video Cable Connection',
-              'Voltage Control Center'
+              'Voltage Control Center',
+              'Power supply connection'
             ],
-            correctAnswer: 1,
+            correctAnswer: 3,
             explanation: 'VCC means power supply - this is where the sensor gets its energy!'
           },
           {
             id: 'q6-2',
             question: 'Which Arduino pin reads analog signals from the sensor?',
             options: [
-              'Digital pin 13',
               'Analog pin A0',
+              'Digital pin 13',
               'Ground pin',
               'Reset pin'
             ],
-            correctAnswer: 1,
+            correctAnswer: 0,
             explanation: 'Analog pin A0 reads the sensor\'s signal, which varies based on soil moisture!'
           },
           {
@@ -321,11 +321,11 @@ export const arduinoCourse: Course = {
             question: 'Why do we use color coding for wires?',
             options: [
               'To make it pretty',
-              'To prevent wiring mistakes',
               'Colors conduct electricity better',
+              'To prevent wiring mistakes',
               'It\'s required by law'
             ],
-            correctAnswer: 1,
+            correctAnswer: 2,
             explanation: 'Color coding helps us quickly identify wire functions and prevent dangerous mistakes!'
           }
         ]
@@ -363,23 +363,23 @@ export const arduinoCourse: Course = {
             question: 'What does a LOW sensor reading indicate?',
             options: [
               'Dry soil',
-              'Wet soil',
               'Broken sensor',
-              'No power'
+              'No power',
+              'Wet soil'
             ],
-            correctAnswer: 1,
+            correctAnswer: 3,
             explanation: 'Low readings mean wet soil because water conducts electricity better!'
           },
           {
             id: 'q7-3',
             question: 'What is Serial.println() used for?',
             options: [
-              'To print on paper',
               'To display data on the computer screen',
+              'To print on paper',
               'To save files',
               'To turn LEDs on'
             ],
-            correctAnswer: 1,
+            correctAnswer: 0,
             explanation: 'Serial.println() sends data to your computer screen, perfect for debugging and monitoring!'
           }
         ]
@@ -405,23 +405,23 @@ export const arduinoCourse: Course = {
             question: 'What should you do BEFORE uploading code to Arduino?',
             options: [
               'Nothing, just upload',
-              'Verify the code for errors',
               'Disconnect all wires',
+              'Verify the code for errors',
               'Turn off the computer'
             ],
-            correctAnswer: 1,
+            correctAnswer: 2,
             explanation: 'Always verify your code first to catch errors before uploading!'
           },
           {
             id: 'q8-2',
             question: 'What happens when you add water to the soil during testing?',
             options: [
-              'Readings increase',
               'Readings decrease',
+              'Readings increase',
               'Nothing changes',
               'Arduino breaks'
             ],
-            correctAnswer: 1,
+            correctAnswer: 0,
             explanation: 'Adding water decreases the sensor readings because wet soil conducts better!'
           },
           {
@@ -430,10 +430,10 @@ export const arduinoCourse: Course = {
             options: [
               'Give up',
               'Buy new components',
-              'Check connections and debug systematically',
-              'Throw it away'
+              'Throw it away',
+              'Check connections and debug systematically'
             ],
-            correctAnswer: 2,
+            correctAnswer: 3,
             explanation: 'Systematic debugging - checking connections, code, and power - solves most problems!'
           }
         ]
@@ -471,11 +471,11 @@ export const arduinoCourse: Course = {
             question: 'How does automated watering save water?',
             options: [
               'It doesn\'t save water',
-              'It only waters when actually needed',
               'It uses dirty water',
-              'It makes plants need less water'
+              'It makes plants need less water',
+              'It only waters when actually needed'
             ],
-            correctAnswer: 1,
+            correctAnswer: 3,
             explanation: 'Automated systems only water when soil is actually dry, preventing waste from over-watering!'
           },
           {
@@ -483,11 +483,11 @@ export const arduinoCourse: Course = {
             question: 'What component could control a real water pump?',
             options: [
               'LED',
-              'Relay module',
               'Resistor',
+              'Relay module',
               'Breadboard'
             ],
-            correctAnswer: 1,
+            correctAnswer: 2,
             explanation: 'A relay module acts like an electronic switch that can control high-power devices like pumps!'
           }
         ]
@@ -512,12 +512,12 @@ export const arduinoCourse: Course = {
             id: 'q10-1',
             question: 'What does IoT stand for?',
             options: [
-              'Internet of Technology',
               'Internet of Things',
+              'Internet of Technology',
               'Internal Operating Technology',
               'Intelligent Output Terminal'
             ],
-            correctAnswer: 1,
+            correctAnswer: 0,
             explanation: 'IoT means Internet of Things - devices connected to the internet that can share data and be controlled remotely!'
           },
           {
@@ -525,11 +525,11 @@ export const arduinoCourse: Course = {
             question: 'What would adding WiFi to your project allow you to do?',
             options: [
               'Nothing new',
-              'Monitor and control from anywhere',
               'Make it heavier',
+              'Monitor and control from anywhere',
               'Use more power'
             ],
-            correctAnswer: 1,
+            correctAnswer: 2,
             explanation: 'WiFi connectivity lets you monitor soil moisture and control watering from anywhere using your phone!'
           },
           {
@@ -538,10 +538,10 @@ export const arduinoCourse: Course = {
             options: [
               'Science',
               'Technology',
-              'Fashion',
-              'Mathematics'
+              'Mathematics',
+              'Fashion'
             ],
-            correctAnswer: 2,
+            correctAnswer: 3,
             explanation: 'STEM stands for Science, Technology, Engineering, and Mathematics!'
           }
         ]

@@ -1,0 +1,223 @@
+/* ==========================================================================
+   1. VIEWPORT CANVAS SETUP & ENVIRONMENT
+   ========================================================================== */
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #0c0f12;
+  color: #e2e8f0;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+body > img:first-of-type {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover;
+  z-index: -2;
+  filter: brightness(25%) contrast(120%) saturate(70%);
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle, transparent 20%, rgba(0, 0, 0, 0.9) 100%);
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* ==========================================================================
+   2. SPATIAL FLEX CONTAINER (FLIPPED SIDE-BY-SIDE SPLIT)
+   ========================================================================== */
+.game-container {
+  display: flex;
+  flex-direction: row-reverse; /* Key change: Flips columns globally */
+  align-items: center;
+  justify-content: center;
+  gap: 60px;
+  width: 95%;
+  max-width: 1100px;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+/* Fluid responsive breakdown for mobile/condensed viewports */
+@media (max-width: 820px) {
+  .game-container {
+    flex-direction: column; /* Stacks image back on top for mobile screens nicely */
+    gap: 24px;
+    overflow-y: auto;
+    height: 100%;
+    justify-content: flex-start;
+    padding-top: 40px;
+  }
+  .boss-avatar {
+    width: 130px !important;
+  }
+}
+
+/* Suspense Floating Avatar Styling (Right Side) */
+.boss-avatar {
+  width: 400px;
+  height: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 0 25px rgba(205, 63, 100, 0.35));
+  animation: suspenseOscillation 4s ease-in-out infinite alternate;
+}
+
+@keyframes suspenseOscillation {
+  from { transform: translateY(0px); }
+  to { transform: translateY(-12px); }
+}
+
+/* ==========================================================================
+   3. CENTRAL STAGE INTERFACE CONTAINER (Left Side)
+   ========================================================================== */
+.scene {
+  flex: 1;
+  background: rgba(13, 18, 22, 0.88);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(157, 54, 86, 0.4);
+  border-radius: 16px;
+  padding: 32px;
+  max-width: 680px;
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.8), 0 0 25px rgba(205, 63, 100, 0.1);
+  box-sizing: border-box;
+}
+
+.fade-in {
+  animation: entranceSlideInward 0.8s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+}
+
+@keyframes entranceSlideInward {
+  from { opacity: 0; transform: translateX(-40px); } /* Slide from left now */
+  to { opacity: 1; transform: translateX(0); }
+}
+
+.scene-title {
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 28px;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: #ff3e6c;
+  letter-spacing: 3px;
+  text-shadow: 0 0 10px rgba(255, 62, 108, 0.5);
+  margin-bottom: 24px;
+  text-align: center;
+}
+
+.quiz-q {
+  background: rgba(0, 0, 0, 0.45);
+  padding: 20px;
+  border-radius: 8px;
+  border-left: 4px solid #cd3f64;
+}
+
+.q-text {
+  font-size: 16px;
+  font-weight: 600;
+  color: #ffffff;
+  margin-bottom: 16px;
+  letter-spacing: 0.3px;
+}
+
+.quiz-options {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px 20px;
+}
+
+@media (max-width: 480px) {
+  .quiz-options {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ==========================================================================
+   4. 3D MODULE SELECTION ACTIONS (UIVERSE ADAPTED)
+   ========================================================================== */
+.quiz-opt {
+  -webkit-appearance: none;
+  appearance: none;
+  position: relative;
+  border-width: 0;
+  padding: 0 0 8px; /* Safe space allocation for depth tracking */
+  box-sizing: border-box;
+  background: transparent;
+  font: inherit;
+  cursor: pointer;
+  outline: none;
+}
+
+/* Dynamic Action Top Panel */
+.quiz-opt .opt-text {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  position: relative;
+  z-index: 2;
+  padding: 12px 16px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 6px;
+  color: #cbd5e1;
+  font-weight: 500;
+  font-size: 14px;
+  transform: translateY(0);
+  transition: transform 0.12s ease, background 0.2s, border-color 0.2s, color 0.2s;
+}
+
+/* Anchor Shadow Base Layer */
+.quiz-opt::after {
+  content: '';
+  position: absolute;
+  z-index: 1;
+  bottom: 0px;
+  left: 2px;
+  border-radius: 6px;
+  width: calc(100% - 4px);
+  height: calc(100% - 6px);
+  background-color: #501728;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.6);
+  transition: background-color 0.15s;
+}
+
+/* Interactive Focus Hooks */
+.quiz-opt:hover .opt-text {
+  background-image: radial-gradient(#cd3f64, #9d3656);
+  border-color: rgba(255, 255, 255, 0.25);
+  color: #ffffff;
+  text-shadow: 0 -1px rgba(0, 0, 0, 0.3);
+}
+
+.quiz-opt:hover::after {
+  background-color: #803;
+}
+
+/* Mechanical Compress Action */
+.quiz-opt:active .opt-text {
+  transform: translateY(4px);
+}
+
+/* Output System Feedback Message */
+.feedback-msg {
+  min-height: 20px;
+  margin-top: 16px;
+  font-size: 14px;
+  font-weight: bold;
+  font-family: 'Courier New', Courier, monospace;
+  text-align: center;
+}

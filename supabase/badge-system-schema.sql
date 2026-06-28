@@ -73,14 +73,12 @@ CREATE INDEX IF NOT EXISTS idx_badges_course_id ON public.badges(course_id);
 
 -- Insert default badges
 INSERT INTO public.badges (id, name, description, icon, lecture_id, course_id) VALUES
-  (uuid_generate_v4(), 'Water Guardian Badge', 'Awarded for mastering soil moisture detection and smart irrigation systems.', '💧', 'soil-moisture', 'arduino-soil-moisture'),
-  (uuid_generate_v4(), 'Smart City Innovator Badge', 'Awarded for mastering smart street lighting and city automation systems.', '💡', 'smart-street-light', 'smart-street-light')
+  (uuid_generate_v4(), 'Water Guardian Badge', 'Awarded for mastering soil moisture detection and smart irrigation systems.', '💧', 'soil-moisture', 'arduino-soil-moisture')
 ON CONFLICT DO NOTHING;
 
 -- Insert default lectures
 INSERT INTO public.lectures (id, title, short_title, description, difficulty, estimated_time, badge_icon, color, bg_color, text_color, course_id) VALUES
-  ('soil-moisture', 'Soil Moisture Detection Using Arduino', 'Soil Moisture Detection', 'Build a smart irrigation system that measures soil moisture and automatically waters plants at the perfect time!', 'Beginner', '2-3 hours', '💧', 'from-teal-500 to-cyan-500', 'bg-teal-50', 'text-teal-700', 'arduino-soil-moisture'),
-  ('smart-street-light', 'Smart Street Light Using Arduino', 'Smart Street Light', 'Create an automatic street lighting system that responds to ambient light levels, saving energy and enabling smart city infrastructure!', 'Beginner', '2-3 hours', '💡', 'from-amber-500 to-orange-500', 'bg-amber-50', 'text-amber-700', 'smart-street-light')
+  ('soil-moisture', 'Soil Moisture Detection Using Arduino', 'Soil Moisture Detection', 'Build a smart irrigation system that measures soil moisture and automatically waters plants at the perfect time!', 'Beginner', '2-3 hours', '💧', 'from-teal-500 to-cyan-500', 'bg-teal-50', 'text-teal-700', 'arduino-soil-moisture')
 ON CONFLICT DO NOTHING;
 
 -- Create function to update updated_at timestamp

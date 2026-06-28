@@ -34,7 +34,7 @@ export interface AuthResponse {
 // Mock auth implementation for development without Supabase
 const mockAuth = {
   isMock: true,
-  session: null as AuthSession | null,
+  session: JSON.parse(localStorage.getItem('learning-adventure-mock-session') || 'null') as AuthSession | null,
   listeners: [] as Array<(event: string, session: AuthSession | null) => void>,
 
   async signIn(email: string, _password: string): Promise<AuthResponse> {
@@ -53,6 +53,7 @@ const mockAuth = {
         user_metadata: { name: email.split('@')[0] },
       },
     };
+    localStorage.setItem('learning-adventure-mock-session', JSON.stringify(this.session));
     
     this.listeners.forEach(cb => cb('SIGNED_IN', this.session));
     return { data: { user: this.session.user, session: this.session }, error: null };
@@ -76,6 +77,7 @@ const mockAuth = {
         user_metadata: { name: email.split('@')[0] },
       },
     };
+    localStorage.setItem('learning-adventure-mock-session', JSON.stringify(this.session));
     
     this.listeners.forEach(cb => cb('SIGNED_IN', this.session));
     return { data: { user: this.session.user, session: this.session }, error: null };
@@ -83,6 +85,7 @@ const mockAuth = {
 
   async signOut(): Promise<{ error: null }> {
     this.session = null;
+    localStorage.removeItem('learning-adventure-mock-session');
     this.listeners.forEach(cb => cb('SIGNED_OUT', null));
     return { error: null };
   },

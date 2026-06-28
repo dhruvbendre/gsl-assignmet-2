@@ -1,9 +1,7 @@
 import { Course, Badge, BossFight } from '../types';
 import { arduinoCourse } from './arduino-course';
 import { obstacleCourse } from './obstacle-course';
-import { smartStreetLightCourse } from './smart-street-light';
 import { soilMoistureBossFight } from './soil-moisture-boss-fight';
-import { smartStreetLightBossFight } from './smart-street-light-boss-fight';
 
 export interface Lecture {
   id: string;
@@ -51,31 +49,6 @@ export const lectures: Lecture[] = [
       'Smart Irrigation',
       'Automation & Control'
     ]
-  },
-  {
-    id: 'smart-street-light',
-    title: 'Smart Street Light Using Arduino',
-    shortTitle: 'Smart Street Light',
-    description: 'Create an automatic street lighting system that responds to ambient light levels, saving energy and enabling smart city infrastructure!',
-    difficulty: 'Beginner',
-    estimatedTime: '2-3 hours',
-    badge: {
-      name: 'Smart City Innovator Badge',
-      description: 'Awarded for mastering smart street lighting and city automation systems.',
-      icon: '💡'
-    },
-    course: smartStreetLightCourse,
-    bossFight: smartStreetLightBossFight,
-    color: 'from-amber-500 to-orange-500',
-    bgColor: 'bg-amber-50',
-    textColor: 'text-amber-700',
-    icon: '🌃',
-    topics: [
-      'Smart City Concepts',
-      'LDR Light Sensors',
-      'Automatic Lighting',
-      'Energy Efficiency'
-    ]
   }
 ];
 
@@ -112,12 +85,10 @@ export function getBadgeByLectureId(id: string): Badge | undefined {
 
 // Map course IDs to lecture IDs for backward compatibility
 export const courseIdToLectureId: Record<string, string> = {
-  'arduino-soil-moisture': 'soil-moisture',
-  'smart-street-light': 'smart-street-light'
+  'arduino-soil-moisture': 'soil-moisture'
 };
 
 // Map lecture IDs to course IDs
 export const lectureIdToCourseId: Record<string, string> = {
-  'soil-moisture': 'arduino-soil-moisture',
-  'smart-street-light': 'smart-street-light'
+  'soil-moisture': 'arduino-soil-moisture'
 };

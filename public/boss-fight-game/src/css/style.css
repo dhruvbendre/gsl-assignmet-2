@@ -1,0 +1,85 @@
+/* Reset default margins and ensure full height */
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden; /* Prevents unwanted scrollbars */
+}
+
+body {
+    /* Set the image as a full background cover */
+    background-image: url('../img/Gemini_Generated_Image_dfl6fudfl6fudfl6.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    font-family: "Cinzel", "Cinzel Decorative", "Alegreya SC", serif;
+    
+    /* Establish a positioning context for the button */
+    position: relative; 
+}
+
+/* Hide the inline HTML <img> tag since we are using it as a CSS background */
+body > img {
+    display: none;
+}
+
+body > p {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: min(82vw, 920px);
+    margin: 0;
+    transform: translate(-50%, -50%);
+    color: #f8fafc;
+    font-family: "Cinzel", "Cinzel Decorative", "Alegreya SC", serif;
+    font-size: clamp(1.25rem, 2.1vw, 2rem);
+    font-weight: 600;
+    line-height: 1.65;
+    letter-spacing: 0.03em;
+    text-align: center;
+    text-shadow: 0 3px 14px rgba(0, 0, 0, 0.95), 0 0 22px rgba(255, 71, 87, 0.38);
+}
+
+body > p.is-typing::after {
+    content: "|";
+    display: inline-block;
+    margin-left: 2px;
+    animation: dialogueCursorBlink 0.8s steps(2, start) infinite;
+}
+
+@keyframes dialogueCursorBlink {
+    50% {
+        opacity: 0;
+    }
+}
+
+/* Style and position the button */
+button {
+    position: absolute;
+    bottom: 10%; /* Places it near the bottom (adjust percentage as needed) */
+    left: 50%;
+    transform: translateX(-50%); /* Perfectly centers it horizontally */
+    
+    /* Optional: Making the button look like a sleek "Start Mission" prompt */
+    padding: 12px 28px;
+    font-family: "Cinzel", "Alegreya SC", "Rajdhani", serif;
+    font-size: 1.2rem;
+    font-weight: bold;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #fff;
+    background-color: #ff4757;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.72);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+/* Simple hover effect */
+button:hover {
+    background-color: #ff6b81;
+    transform: translateX(-50%) scale(1.05);
+}

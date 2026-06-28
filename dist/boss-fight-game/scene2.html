@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Boss Fight - Item Selection</title>
+    <link rel="stylesheet" href="src/css/style2.css">
+    <link rel="stylesheet" href="src/css/game-ui.css">
+    <script src="js/game.js" defer></script>
+</head>
+<body>
+    <h>collect the right items</h>
+
+    <img src="src/img/Gemini_Generated_Image_szh8u0szh8u0szh8.png" id="bg-reference" alt="Background">
+
+    <div class="table-container">
+
+        <button class="choice-btn item-1" data-id="item1">
+            <img src="src/icons/ChatGPT Image Jun 26, 2026, 11_00_01 PM.png" alt="Calculator">
+            <span>Calculator</span>
+        </button>
+
+        <button class="choice-btn item-2" data-id="item2">
+            <img src="src/icons/ChatGPT Image Jun 26, 2026, 11_04_28 PM.png" alt="Bread">
+            <span>Bread</span>
+        </button>
+
+        <button class="choice-btn item-3" data-id="item3">
+            <img src="src/icons/ChatGPT Image Jun 26, 2026, 11_07_00 PM.png" alt="Arduino">
+            <span>Arduino</span>
+        </button>
+
+        <button class="choice-btn item-4" data-id="item4">
+            <img src="src/icons/ChatGPT Image Jun 26, 2026, 11_16_02 PM.png" alt="toycar">
+            <span>Toycar</span>
+        </button>
+
+        <button class="choice-btn item-5" data-id="item5">
+            <img src="src/icons/ChatGPT Image Jun 26, 2026, 10_58_53 PM.png" alt="Torch">
+            <span>Torch</span>
+        </button>
+
+        <button class="choice-btn item-6" data-id="item6">
+            <img src="src/icons/ChatGPT Image Jun 26, 2026, 10_59_14 PM.png" alt="Spoon">
+            <span>Spoon</span>
+        </button>
+
+        <button class="choice-btn item-7" data-id="item7">
+            <img src="src/icons/ChatGPT Image Jun 26, 2026, 11_13_24 PM.png" alt="Sensor">
+            <span>Sensor</span>
+        </button>
+
+        <button class="choice-btn item-8" data-id="item8">
+            <img src="src/icons/ChatGPT Image Jun 26, 2026, 10_59_54 PM.png" alt="Thermometer">
+            <span>Thermometer</span>
+        </button>
+
+        <button class="choice-btn item-9" data-id="item9">
+            <img src="src/icons/ChatGPT Image Jun 27, 2026, 01_25_56 PM.png" alt="Red">
+            <span>Red Wire</span>
+        </button>
+
+        <button class="choice-btn item-10" data-id="item10">
+            <img src="src/icons/ChatGPT Image Jun 27, 2026, 01_27_45 PM.png" alt="black">
+            <span>Black Wire</span>
+        </button>
+
+        <button class="choice-btn item-11" data-id="item11">
+            <img src="src/icons/ChatGPT Image Jun 27, 2026, 01_31_52 PM.png" alt="yellow">
+            <span>Yellow Wire</span>
+        </button>
+
+        <button class="choice-btn item-12" data-id="item12">
+            <img src="src/icons/ChatGPT Image Jun 27, 2026, 01_24_16 PM.png" alt="blueprint">
+            <span>Blueprint</span>
+        </button>
+
+    </div>
+
+    <div class="scene2-action-layer" aria-live="polite">
+        <button id="nextStepBtn" class="action-btn-hidden" type="button">Next Step</button>
+    </div>
+
+    <div class="inventory-container">
+        <div class="inv-title">Inventory</div>
+        <div class="inv-row">
+            <div class="inv-slot" id="slot-1"></div>
+            <div class="inv-slot" id="slot-2"></div>
+            <div class="inv-slot" id="slot-3"></div>
+            <div class="inv-slot" id="slot-4"></div>
+            <div class="inv-slot" id="slot-5"></div>
+            <div class="inv-slot" id="slot-6"></div>
+        </div>
+    </div>
+
+    <div class="feedback-msg" id="fb2"></div>
+
+</body>
+</html>

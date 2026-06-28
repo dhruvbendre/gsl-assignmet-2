@@ -26,12 +26,12 @@ export const obstacleCourse: Course = {
             id: 'obs-q1-1',
             question: 'How do ultrasonic sensors measure distance?',
             options: [
-              'By measuring light reflection',
               'By measuring time for sound echo to return',
+              'By measuring light reflection',
               'By measuring temperature changes',
               'By measuring magnetic fields'
             ],
-            correctAnswer: 1,
+            correctAnswer: 0,
             explanation: 'Ultrasonic sensors send sound waves and measure the time for the echo to return to calculate distance!'
           },
           {
@@ -39,11 +39,11 @@ export const obstacleCourse: Course = {
             question: 'What is the typical range of the HC-SR04 sensor?',
             options: [
               '1mm to 10cm',
-              '2cm to 400cm',
               '1m to 1km',
-              '10cm to 50cm'
+              '10cm to 50cm',
+              '2cm to 400cm'
             ],
-            correctAnswer: 1,
+            correctAnswer: 3,
             explanation: 'The HC-SR04 can detect objects from 2cm to 400cm (4 meters) away!'
           },
           {
@@ -51,11 +51,11 @@ export const obstacleCourse: Course = {
             question: 'Which animal uses the same principle as ultrasonic sensors?',
             options: [
               'Eagle',
-              'Bat',
               'Shark',
+              'Bat',
               'Owl'
             ],
-            correctAnswer: 1,
+            correctAnswer: 2,
             explanation: 'Bats use echolocation, the same principle of sending sound waves and listening for echoes!'
           }
         ]
@@ -104,12 +104,12 @@ export const obstacleCourse: Course = {
             id: 'obs-q2-3',
             question: 'Why do higher frequencies provide better accuracy?',
             options: [
-              'They travel faster',
               'They have shorter wavelengths',
+              'They travel faster',
               'They are louder',
               'They use less power'
             ],
-            correctAnswer: 1,
+            correctAnswer: 0,
             explanation: 'Shorter wavelengths can detect smaller objects and provide more precise measurements!'
           }
         ]
@@ -147,11 +147,11 @@ export const obstacleCourse: Course = {
             question: 'What triggers the sensor to send an ultrasonic pulse?',
             options: [
               'Connecting power',
-              'A 10µs HIGH signal on Trig pin',
               'Pressing a button',
+              'A 10µs HIGH signal on Trig pin',
               'Serial command'
             ],
-            correctAnswer: 1,
+            correctAnswer: 2,
             explanation: 'A 10 microsecond HIGH pulse on the Trig pin triggers the sensor to send 8 cycles of ultrasonic waves!'
           },
           {
@@ -159,11 +159,11 @@ export const obstacleCourse: Course = {
             question: 'What does the Echo pin output?',
             options: [
               'A continuous signal',
-              'A pulse whose width equals time of flight',
               'The distance in centimeters',
-              'A digital 1 or 0'
+              'A digital 1 or 0',
+              'A pulse whose width equals time of flight'
             ],
-            correctAnswer: 1,
+            correctAnswer: 3,
             explanation: 'The Echo pin outputs a HIGH pulse whose duration equals the time it took for the sound to travel and return!'
           }
         ]
@@ -200,12 +200,12 @@ export const obstacleCourse: Course = {
             id: 'obs-q4-2',
             question: 'Which Arduino pin mode should Trig be set to?',
             options: [
-              'INPUT',
               'OUTPUT',
+              'INPUT',
               'INPUT_PULLUP',
               'ANALOG'
             ],
-            correctAnswer: 1,
+            correctAnswer: 0,
             explanation: 'Trig is an INPUT to the sensor, so Arduino must set it as OUTPUT to send the trigger signal!'
           },
           {
@@ -213,11 +213,11 @@ export const obstacleCourse: Course = {
             question: 'What happens if you reverse VCC and GND?',
             options: [
               'Nothing, it works either way',
-              'The sensor may be damaged',
               'It works better',
+              'The sensor may be damaged',
               'The readings are inverted'
             ],
-            correctAnswer: 1,
+            correctAnswer: 2,
             explanation: 'Reversing power and ground can damage electronic components - always connect VCC to power and GND to ground!'
           }
         ]
@@ -243,11 +243,11 @@ export const obstacleCourse: Course = {
             question: 'How long should the Trig pin be set HIGH?',
             options: [
               '1 microsecond',
-              '10 microseconds',
               '100 microseconds',
-              '1 millisecond'
+              '1 millisecond',
+              '10 microseconds'
             ],
-            correctAnswer: 1,
+            correctAnswer: 3,
             explanation: 'The HC-SR04 requires exactly a 10µs HIGH pulse to trigger an ultrasonic burst!'
           },
           {
@@ -255,23 +255,23 @@ export const obstacleCourse: Course = {
             question: 'Why do we divide the duration by 2 in the distance calculation?',
             options: [
               'To convert to centimeters',
-              'Because sound travels to the object AND back',
               'To account for temperature',
-              'To improve accuracy'
+              'To improve accuracy',
+              'Because sound travels to the object AND back'
             ],
-            correctAnswer: 1,
+            correctAnswer: 3,
             explanation: 'The sound wave travels to the object and back, so the total distance is twice the actual distance to the object!'
           },
           {
             id: 'obs-q5-3',
             question: 'What does pulseIn() measure?',
             options: [
-              'Voltage level',
               'Duration of a pulse in microseconds',
+              'Voltage level',
               'Frequency of a signal',
               'Number of pulses'
             ],
-            correctAnswer: 1,
+            correctAnswer: 0,
             explanation: 'pulseIn() measures how long (in microseconds) a pin stays in a specified state (HIGH or LOW)!'
           }
         ]
@@ -297,23 +297,23 @@ export const obstacleCourse: Course = {
             question: 'Why use a resistor with a buzzer?',
             options: [
               'To make it quieter',
-              'To limit current and protect components',
               'To change the frequency',
-              'It\'s not needed'
+              'It\'s not needed',
+              'To limit current and protect components'
             ],
-            correctAnswer: 1,
+            correctAnswer: 3,
             explanation: 'A resistor limits current flow, protecting both the buzzer and Arduino pin from excessive current!'
           },
           {
             id: 'obs-q6-2',
             question: 'What does tone(pin, frequency) do?',
             options: [
-              'Reads a frequency from a pin',
               'Generates a square wave at the specified frequency',
+              'Reads a frequency from a pin',
               'Measures sound level',
               'Turns the pin off'
             ],
-            correctAnswer: 1,
+            correctAnswer: 0,
             explanation: 'tone() generates a square wave at the specified frequency, creating sound from a piezo buzzer!'
           },
           {
@@ -321,11 +321,11 @@ export const obstacleCourse: Course = {
             question: 'How can you make the alarm more urgent as objects get closer?',
             options: [
               'Increase volume',
-              'Increase beep frequency or use continuous tone',
               'Change buzzer color',
+              'Increase beep frequency or use continuous tone',
               'Move the sensor'
             ],
-            correctAnswer: 1,
+            correctAnswer: 2,
             explanation: 'You can increase beep frequency (more beeps per second) or switch to continuous tone as distance decreases!'
           }
         ]
@@ -375,11 +375,11 @@ export const obstacleCourse: Course = {
             question: 'Why use multiple LEDs instead of just one?',
             options: [
               'It looks cooler',
-              'To provide multiple levels of warning',
               'To use more pins',
-              'Single LEDs are too expensive'
+              'Single LEDs are too expensive',
+              'To provide multiple levels of warning'
             ],
-            correctAnswer: 1,
+            correctAnswer: 3,
             explanation: 'Multiple LEDs create a graduated warning system - safe, caution, and danger levels!'
           }
         ]
@@ -417,11 +417,11 @@ export const obstacleCourse: Course = {
             question: 'Why add a delay between sensor readings?',
             options: [
               'To save power',
-              'To allow previous sound waves to dissipate',
               'To make the code simpler',
-              'It\'s not necessary'
+              'It\'s not necessary',
+              'To allow previous sound waves to dissipate'
             ],
-            correctAnswer: 1,
+            correctAnswer: 3,
             explanation: 'A delay prevents the sensor from detecting echoes from previous pulses, ensuring each reading is independent!'
           },
           {
@@ -459,11 +459,11 @@ export const obstacleCourse: Course = {
             question: 'What is the typical rotation range of a standard servo motor?',
             options: [
               '90 degrees',
-              '180 degrees',
               '270 degrees',
-              '360 degrees'
+              '360 degrees',
+              '180 degrees'
             ],
-            correctAnswer: 1,
+            correctAnswer: 3,
             explanation: 'Standard servo motors typically rotate 180 degrees (0° to 180°), perfect for scanning!'
           },
           {
@@ -483,11 +483,11 @@ export const obstacleCourse: Course = {
             question: 'How can servo scanning help a robot navigate?',
             options: [
               'It makes the robot faster',
-              'It can find the direction with most clearance',
               'It reduces power consumption',
-              'It makes the robot smaller'
+              'It makes the robot smaller',
+              'It can find the direction with most clearance'
             ],
-            correctAnswer: 1,
+            correctAnswer: 3,
             explanation: 'By scanning multiple directions, the robot can compare distances and choose the path with the most space!'
           }
         ]
@@ -524,12 +524,12 @@ export const obstacleCourse: Course = {
             id: 'obs-q10-2',
             question: 'How could you extend this project for smart home use?',
             options: [
-              'Add WiFi/Bluetooth for phone notifications',
               'Make it bigger',
+              'Add WiFi/Bluetooth for phone notifications',
               'Use more LEDs',
               'Add more buzzers'
             ],
-            correctAnswer: 0,
+            correctAnswer: 1,
             explanation: 'Adding WiFi or Bluetooth connectivity allows remote monitoring and integration with smart home systems!'
           },
           {
@@ -537,11 +537,11 @@ export const obstacleCourse: Course = {
             question: 'What STEM fields does this project integrate?',
             options: [
               'Only programming',
-              'Physics, electronics, programming, and engineering',
               'Only electronics',
-              'Only physics'
+              'Only physics',
+              'Physics, electronics, programming, and engineering'
             ],
-            correctAnswer: 1,
+            correctAnswer: 3,
             explanation: 'This project combines multiple STEM disciplines - physics (sound), electronics (circuits), programming (code), and engineering (design)!'
           }
         ]

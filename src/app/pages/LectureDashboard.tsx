@@ -106,7 +106,9 @@ export function LectureDashboard() {
 
   const getUnlockedBadges = () => {
     const badges = storage.getBadges(userId || undefined);
-    return badges;
+    return badges.filter((badge) =>
+      lectures.some((lecture) => badge.id === `badge-${lecture.id}` || badge.courseId === lecture.course.id)
+    );
   };
 
   const handleSignOut = async () => {

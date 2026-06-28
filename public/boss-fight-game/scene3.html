@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Boss Fight - Circuit Assembly Puzzle</title>
+    <link rel="stylesheet" href="src/css/game-ui.css">
+    <link rel="stylesheet" href="src/css/scene3.css">
+    <script src="js/game.js" defer></script>
+    <script src="src/js/scene3.js" defer></script>
+</head>
+<body>
+    <img src="src/img/Gemini_Generated_Image_szh8u0szh8u0szh8.png" alt="Dark laboratory background">
+
+    <main class="scene3-shell" aria-labelledby="scene3-title">
+        <header class="scene3-header">
+            <h1 id="scene3-title">Circuit Assembly Puzzle</h1>
+            <p>Mount modules onto their blueprint templates and bridge corresponding port terminals together.</p>
+        </header>
+
+        <div id="game-container">
+            <section id="workspace" aria-label="Circuit assembly workspace">
+                <div class="module-box" id="sensor-wrapper">
+                    <h2>Sensor</h2>
+                    <div class="drop-zone component-zone" data-expected="sensor" id="zone-sensor" aria-label="Sensor placement target"></div>
+
+                    <div class="pin-interface" id="sensor-pins" aria-hidden="true">
+                        <div class="pin-row">VCC <div class="port-hole"></div></div>
+                        <div class="pin-row">GND <div class="port-hole"></div></div>
+                        <div class="pin-row">AO <div class="port-hole"></div></div>
+                    </div>
+                </div>
+
+                <div class="drop-zone wire-zone" data-expected="vcc" id="zone-vcc" aria-label="VCC wire target"></div>
+                <div class="drop-zone wire-zone" data-expected="gnd" id="zone-gnd" aria-label="GND wire target"></div>
+                <div class="drop-zone wire-zone" data-expected="ao" id="zone-ao" aria-label="AO wire target"></div>
+
+                <div class="module-box" id="arduino-wrapper">
+                    <h2>Arduino</h2>
+                    <div class="drop-zone component-zone" data-expected="arduino" id="zone-arduino" aria-label="Arduino placement target"></div>
+
+                    <div class="pin-interface" id="arduino-pins" aria-hidden="true">
+                        <div class="pin-row"><div class="port-hole"></div> VCC</div>
+                        <div class="pin-row"><div class="port-hole"></div> GND</div>
+                        <div class="pin-row"><div class="port-hole"></div> AO</div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="toolbox" aria-label="Collected inventory">
+                <div class="toolbox-title">Inventory</div>
+                <div class="inventory-grid" id="scene3Inventory"></div>
+            </section>
+        </div>
+
+        <div class="scene3-action-layer" aria-live="polite">
+            <button id="nextStepBtn" class="action-btn-hidden" type="button">Next Mission</button>
+        </div>
+    </main>
+</body>
+</html>

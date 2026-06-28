@@ -68,6 +68,11 @@ export interface UserProgress {
   bossFightAttempts: number;
   bossFightPassed: boolean;
   bossFightScore?: number;
+  bossFightStatus?: 'not-started' | 'in-progress' | 'completed' | 'failed';
+  bossFightHighScore?: number;
+  remainingHearts?: number;
+  completionTime?: number;
+  completedAt?: string;
   badges: string[];
 }
 

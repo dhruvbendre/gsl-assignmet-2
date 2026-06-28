@@ -32,6 +32,8 @@ import {
 } from 'lucide-react';
 import { toast } from 'sonner';
 
+const BOSS_FIGHT_FEEDBACK_KEY = 'stem-boss-fight-feedback';
+
 export function Dashboard() {
   const navigate = useNavigate();
   const { lectureId } = useParams<{ lectureId: string }>();
@@ -75,6 +77,16 @@ export function Dashboard() {
       setCurrentChapter(course.chapters[0]);
     }
   }, [course, userId]);
+
+  useEffect(() => {
+    const rawFeedback = sessionStorage.getItem(BOSS_FIGHT_FEEDBACK_KEY);
+    if (!rawFeedback) return;
+
+    sessionStorage.removeItem(BOSS_FIGHT_FEEDBACK_KEY);
+    const feedback = JSON.parse(rawFeedback) as { type: 'success' | 'error'; title: string; description: string };
+    const notify = feedback.type === 'success' ? toast.success : toast.error;
+    notify(feedback.title, { description: feedback.description, duration: 5000 });
+  }, []);
 
   // Handle responsive sidebar
   useEffect(() => {
@@ -222,15 +234,6 @@ export function Dashboard() {
       'Arduino Uno',
       'Ultrasonic Sensor (HC-SR04)',
       'Buzzer',
-      'Breadboard',
-      'Jumper Wires',
-      'USB Cable'
-    ],
-    'smart-street-light': [
-      'Arduino Uno',
-      'LDR (Light Dependent Resistor)',
-      'LED',
-      'Resistor (220Ω)',
       'Breadboard',
       'Jumper Wires',
       'USB Cable'

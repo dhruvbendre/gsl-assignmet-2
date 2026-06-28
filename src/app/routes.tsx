@@ -4,6 +4,8 @@ import { Login } from './pages/Login';
 import { Intro } from './pages/Intro';
 import { Dashboard } from './pages/Dashboard';
 import { BossFight } from './pages/BossFight';
+import { BossFightResult } from './pages/BossFightResult';
+import { EscapeRoom } from './pages/EscapeRoom';
 import { Profile } from './pages/Profile';
 import { Leaderboard } from './pages/Leaderboard';
 import { CourseSelection } from './pages/CourseSelection';
@@ -56,6 +58,22 @@ export const router = createBrowserRouter([
     Component: () => (
       <ProtectedRoute requireAuth={true}>
         <BossFight />
+      </ProtectedRoute>
+    ),
+  },
+  {
+    path: '/boss-fight/:lectureId/result',
+    Component: () => (
+      <ProtectedRoute requireAuth={true}>
+        <BossFightResult />
+      </ProtectedRoute>
+    ),
+  },
+  {
+    path: '/escape-room/:lectureId',
+    Component: () => (
+      <ProtectedRoute requireAuth={true}>
+        <EscapeRoom />
       </ProtectedRoute>
     ),
   },

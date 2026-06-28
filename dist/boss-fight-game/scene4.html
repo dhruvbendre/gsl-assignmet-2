@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Boss Fight - Coding Puzzle</title>
+    <link rel="stylesheet" href="src/css/commom.css">
+    <link rel="stylesheet" href="src/css/game-ui.css">
+    <script src="js/game.js" defer></script>
+</head>
+<body>
+    <img src="src/img/Gemini_Generated_Image_szh8u0szh8u0szh8.png">
+    <div class="scene fade-in" id="s6">
+    <div class="heading">Arrange the Code</div>
+    <div class="sub">select and tap the blocks into the correct order.</div>
+    <div class="coding-layout">
+      <div>
+        <div class="coding-column-label">Blocks</div>
+        <div class="code-blocks" id="code-source">
+          <div class="code-block block-pink" draggable="true" data-val="5">Print "Wet"</div>
+          <div class="code-block block-yellow" draggable="true" data-val="2">If Value &lt; 500</div>
+          <div class="code-block block-blue" draggable="true" data-val="1">Read Sensor</div>
+          <div class="code-block block-green" draggable="true" data-val="4">Else</div>
+          <div class="code-block block-green" draggable="true" data-val="3">Print "Dry"</div>
+        </div>
+      </div>
+      <div>
+        <div class="coding-column-label">Order</div>
+        <div class="drop-zones" id="code-target">
+          <div class="drop-zone" data-pos="1">1</div>
+          <div class="drop-zone" data-pos="2">2</div>
+          <div class="drop-zone" data-pos="3">3</div>
+          <div class="drop-zone" data-pos="4">4</div>
+          <div class="drop-zone" data-pos="5">5</div>
+        </div>
+      </div>
+    </div>
+    <div class="feedback-msg" id="fb6"></div>
+    <button class="nav-btn secondary" type="button">Check Order</button>
+  </div>
+    
+</body>
+</html>
