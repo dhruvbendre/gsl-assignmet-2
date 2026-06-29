@@ -117,10 +117,14 @@ export function LectureDashboard() {
     navigate('/');
   };
 
+  const completedLectures = Object.values(userProgress).filter(p => p?.completedChapters?.length).length;
+  const bossFightsWon = Object.values(userProgress).filter(p => p?.bossFightPassed).length;
+
   return (
-    <div className="bg-gradient-to-br from-slate-50 via-blue-50 to-purple-50 lg:min-h-screen">
+    <div className="gsl-platform min-h-screen bg-[#F8FAFC] text-slate-900">
+      <div className="pointer-events-none fixed inset-0 gsl-circuit opacity-60" />
       {/* Header */}
-      <header className="bg-white/80 backdrop-blur-sm border-b border-slate-200 sticky top-0 z-40">
+      <header className="sticky top-0 z-40 border-b border-slate-200/70 bg-white/85 backdrop-blur-xl">
         <div className="max-w-7xl mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-4">
@@ -133,17 +137,17 @@ export function LectureDashboard() {
                 {sidebarOpen ? <X /> : <Menu />}
               </Button>
               <div>
-                <h1 className="text-2xl font-bold text-slate-800">
-                  STEM Learning Dashboard
+                <h1 className="gsl-display text-2xl font-black text-slate-950">
+                  GetsetLearn Mission Control
                 </h1>
-                <p className="text-slate-600 text-sm mt-1">
-                  Choose your next learning adventure
+                <p className="text-slate-600 text-sm mt-1 font-medium">
+                  Choose a practical STEM mission and keep your streak alive
                 </p>
               </div>
             </div>
             
             <div className="flex items-center gap-2">
-              <div className="hidden md:flex items-center gap-2 bg-slate-100 px-4 py-2 rounded-full">
+              <div className="hidden md:flex items-center gap-2 rounded-md bg-amber-100 px-4 py-2">
                 <Zap className="w-5 h-5 text-yellow-500" />
                 <span className="font-bold text-slate-700">{totalXP} XP</span>
               </div>
@@ -181,21 +185,41 @@ export function LectureDashboard() {
       </header>
 
       {/* Main Content */}
-      <main className="max-w-7xl mx-auto px-4 py-12">
+      <main className="relative max-w-7xl mx-auto px-4 py-12">
         {/* Hero Section */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="text-center mb-12"
+          className="mb-10 overflow-hidden rounded-lg bg-slate-950 p-7 text-white shadow-2xl shadow-blue-950/20 md:p-10"
         >
-          <h2 className="text-4xl font-bold text-slate-800 mb-4">
-            Select Your Lecture
-          </h2>
-          <p className="text-lg text-slate-600 max-w-2xl mx-auto">
-            Each lecture includes interactive chapters, quizzes, a boss fight challenge, 
-            and a completion badge. Choose one to get started!
-          </p>
+          <div className="absolute inset-0 gsl-circuit opacity-40" />
+          <div className="relative grid gap-8 lg:grid-cols-[1fr_0.8fr] lg:items-center">
+            <div>
+              <Badge className="mb-4 rounded-md bg-blue-500/20 text-blue-100 hover:bg-blue-500/20">
+                Daily streak: 3 missions warmed up
+              </Badge>
+              <h2 className="gsl-display text-4xl font-black tracking-tight md:text-5xl">
+                Select your next STEM mission
+              </h2>
+              <p className="mt-4 max-w-2xl text-lg leading-8 text-slate-300">
+                Every mission blends story chapters, quick quizzes, earnable badges, and a final boss fight that proves the concept stuck.
+              </p>
+            </div>
+            <div className="grid grid-cols-2 gap-3">
+              {[
+                ['Roadmap', '10 chapters'],
+                ['Reward', 'Water Guardian'],
+                ['Arena', 'Professor Dryroot'],
+                ['Mode', 'Hands-on lab']
+              ].map(([label, value]) => (
+                <div key={label} className="rounded-lg border border-white/10 bg-white/10 p-4">
+                  <div className="text-xs font-bold uppercase tracking-[0.18em] text-blue-200">{label}</div>
+                  <div className="gsl-subhead mt-1 text-lg font-extrabold">{value}</div>
+                </div>
+              ))}
+            </div>
+          </div>
         </motion.div>
 
         {/* Stats Bar */}
@@ -205,27 +229,23 @@ export function LectureDashboard() {
           transition={{ duration: 0.5, delay: 0.1 }}
           className="mb-12"
         >
-          <Card className="p-6 shadow-lg">
+          <Card className="rounded-lg border-slate-200 p-6 shadow-xl shadow-slate-200/80">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
               <div className="text-center">
-                <div className="text-3xl font-bold text-teal-600">{lectures.length}</div>
-                <div className="text-sm text-slate-600">Available Lectures</div>
+                <div className="gsl-display text-3xl font-black text-blue-600">{completedLectures}</div>
+                <div className="text-sm text-slate-600">Lectures Completed</div>
               </div>
               <div className="text-center">
-                <div className="text-3xl font-bold text-purple-600">
-                  {getUnlockedBadges().length}
-                </div>
-                <div className="text-sm text-slate-600">Badges Earned</div>
-              </div>
-              <div className="text-center">
-                <div className="text-3xl font-bold text-amber-600">{totalXP}</div>
+                <div className="gsl-display text-3xl font-black text-amber-600">{totalXP}</div>
                 <div className="text-sm text-slate-600">Total XP</div>
               </div>
               <div className="text-center">
-                <div className="text-3xl font-bold text-blue-600">
-                  {Object.values(userProgress).filter(p => p !== null).length}
-                </div>
-                <div className="text-sm text-slate-600">Lectures Started</div>
+                <div className="gsl-display text-3xl font-black text-violet-600">{getUnlockedBadges().length}</div>
+                <div className="text-sm text-slate-600">Badges Earned</div>
+              </div>
+              <div className="text-center">
+                <div className="gsl-display text-3xl font-black text-emerald-600">{bossFightsWon}</div>
+                <div className="text-sm text-slate-600">Boss Fights Won</div>
               </div>
             </div>
           </Card>
@@ -245,22 +265,25 @@ export function LectureDashboard() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
               >
-                <Card className={`overflow-hidden hover:shadow-2xl transition-all duration-300 ${
+                <Card className={`gsl-card-shine gsl-tilt overflow-hidden rounded-lg border-slate-200 bg-white shadow-xl shadow-slate-200/70 transition-all duration-300 ${
                   isCompleted ? 'ring-2 ring-green-500' : hasProgress ? 'ring-2 ring-blue-500' : ''
                 }`}>
                   {/* Card Header with Gradient */}
-                  <div className={`bg-gradient-to-r ${lecture.color} p-6 text-white`}>
+                  <div className="relative bg-slate-950 p-6 text-white">
+                    <div className={`absolute inset-0 bg-gradient-to-r ${lecture.color} opacity-90`} />
+                    <div className="absolute inset-0 gsl-circuit opacity-30" />
+                    <div className="relative">
                     <div className="flex items-start justify-between">
                       <div className="flex items-center gap-4">
-                        <div className="text-5xl">{lecture.icon}</div>
+                        <div className="flex h-16 w-16 items-center justify-center rounded-lg bg-white/15 text-5xl backdrop-blur-sm">{lecture.icon}</div>
                         <div>
-                          <h3 className="text-xl font-bold">{lecture.shortTitle}</h3>
+                          <h3 className="gsl-subhead text-xl font-extrabold">{lecture.shortTitle}</h3>
                           <div className="flex items-center gap-2 mt-2">
-                            <Badge className="bg-white/20 text-white border-white/30">
+                            <Badge className="rounded-md bg-white/20 text-white border-white/30">
                               <Star className="w-3 h-3 mr-1" />
                               {lecture.difficulty}
                             </Badge>
-                            <Badge className="bg-white/20 text-white border-white/30">
+                            <Badge className="rounded-md bg-white/20 text-white border-white/30">
                               <Clock className="w-3 h-3 mr-1" />
                               {lecture.estimatedTime}
                             </Badge>
@@ -280,6 +303,7 @@ export function LectureDashboard() {
                         </div>
                       )}
                     </div>
+                    </div>
                   </div>
 
                   {/* Card Body */}
@@ -289,7 +313,7 @@ export function LectureDashboard() {
                     </p>
 
                     {/* Badge Preview */}
-                    <div className={`${lecture.bgColor} p-4 rounded-xl mb-4`}>
+                    <div className={`${lecture.bgColor} rounded-lg border border-slate-200 p-4 mb-4`}>
                       <div className="flex items-center gap-3">
                         <div className="text-3xl">{lecture.badge.icon}</div>
                         <div>
@@ -305,8 +329,8 @@ export function LectureDashboard() {
 
                     {/* Topics Preview */}
                     <div className="mb-4">
-                      <h4 className="text-sm font-semibold text-slate-700 mb-2">
-                        What you'll learn:
+                      <h4 className="text-sm font-bold uppercase tracking-wide text-slate-700 mb-2">
+                        What you'll learn
                       </h4>
                       <div className="space-y-1">
                         {lecture.topics.map((topic, i) => (
@@ -338,9 +362,15 @@ export function LectureDashboard() {
                     )}
 
                     {/* Action Button */}
+                    <div className="mb-4 grid grid-cols-3 gap-2 text-center text-xs font-bold text-slate-600">
+                      <div className="rounded-md bg-slate-100 p-2">Quiz</div>
+                      <div className="rounded-md bg-slate-100 p-2">Badge</div>
+                      <div className="rounded-md bg-slate-100 p-2">Boss</div>
+                    </div>
+
                     <Button
                       onClick={() => hasProgress ? continueLecture(lecture.id) : startLecture(lecture.id)}
-                      className={`w-full bg-gradient-to-r ${lecture.color} hover:opacity-90 py-6 text-lg`}
+                      className={`gsl-ripple w-full rounded-md bg-gradient-to-r ${lecture.color} hover:opacity-90 py-6 text-lg font-extrabold`}
                     >
                       {hasProgress ? (
                         <>

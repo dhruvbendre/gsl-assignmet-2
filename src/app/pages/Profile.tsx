@@ -55,12 +55,17 @@ export function Profile() {
   const progressPercentage = progress ? (progress.completedChapters.length / arduinoCourse.chapters.length) * 100 : 0;
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-teal-50">
+    <div className="gsl-platform min-h-screen bg-[#F8FAFC] text-slate-900">
+      <div className="pointer-events-none fixed inset-0 gsl-circuit opacity-50" />
       {/* Header */}
-      <header className="bg-gradient-to-r from-[#0F766E] to-[#14B8A6] border-b border-teal-600 shadow-lg">
+      <header className="relative border-b border-white/10 bg-slate-950 shadow-lg">
+        <div className="absolute inset-0 gsl-circuit opacity-30" />
         <div className="max-w-7xl mx-auto px-4 py-6">
-          <div className="flex items-center justify-between">
-            <h1 className="text-3xl font-bold text-white">Profile</h1>
+          <div className="relative flex items-center justify-between">
+            <div>
+              <h1 className="gsl-display text-3xl font-black text-white">Profile & Achievements</h1>
+              <p className="mt-1 text-sm font-medium text-blue-100">Badges, XP, boss wins, and practical STEM progress</p>
+            </div>
             <div className="flex items-center gap-2">
               <Button
                 onClick={() => navigate('/dashboard')}
@@ -84,28 +89,31 @@ export function Profile() {
         </div>
       </header>
 
-      <div className="max-w-7xl mx-auto px-4 py-8">
+      <div className="relative max-w-7xl mx-auto px-4 py-8">
         {/* Profile Header */}
-        <Card className="p-8 mb-8 shadow-xl">
+        <Card className="overflow-hidden rounded-lg border-slate-200 p-0 mb-8 shadow-xl shadow-slate-200/80">
+          <div className="bg-gradient-to-r from-blue-600 via-violet-600 to-slate-950 p-8 text-white">
           <div className="flex flex-col md:flex-row items-center gap-6">
-            <div className="text-7xl">{avatar}</div>
+            <div className="flex h-28 w-28 items-center justify-center rounded-lg border border-white/20 bg-white/15 text-7xl backdrop-blur-sm">{avatar}</div>
             <div className="flex-1 text-center md:text-left">
-              <h2 className="text-3xl font-bold text-slate-800 mb-2">{username}</h2>
+              <h2 className="gsl-display text-3xl font-black mb-2">{username}</h2>
+              <p className="mb-4 text-blue-100">STEM Explorer in training</p>
               <div className="flex flex-wrap items-center gap-4 justify-center md:justify-start">
-                <div className="flex items-center gap-2 bg-teal-100 px-4 py-2 rounded-full">
-                  <Zap className="w-5 h-5 text-teal-700" />
-                  <span className="font-bold text-teal-700">{stats.totalXP} XP</span>
+                <div className="flex items-center gap-2 rounded-md bg-white/15 px-4 py-2">
+                  <Zap className="w-5 h-5 text-amber-200" />
+                  <span className="font-bold text-white">{stats.totalXP} XP</span>
                 </div>
-                <div className="flex items-center gap-2 bg-purple-100 px-4 py-2 rounded-full">
-                  <Trophy className="w-5 h-5 text-purple-700" />
-                  <span className="font-bold text-purple-700">{badges.length} Badges</span>
+                <div className="flex items-center gap-2 rounded-md bg-white/15 px-4 py-2">
+                  <Trophy className="w-5 h-5 text-violet-100" />
+                  <span className="font-bold text-white">{badges.length} Badges</span>
                 </div>
-                <div className="flex items-center gap-2 bg-blue-100 px-4 py-2 rounded-full">
-                  <BookOpen className="w-5 h-5 text-blue-700" />
-                  <span className="font-bold text-blue-700">{stats.coursesCompleted} Courses</span>
+                <div className="flex items-center gap-2 rounded-md bg-white/15 px-4 py-2">
+                  <BookOpen className="w-5 h-5 text-blue-100" />
+                  <span className="font-bold text-white">{stats.coursesCompleted} Courses</span>
                 </div>
               </div>
             </div>
+          </div>
           </div>
         </Card>
 
@@ -117,8 +125,8 @@ export function Profile() {
 
           {/* Badges Tab */}
           <TabsContent value="badges" className="space-y-6">
-            <Card className="p-6 shadow-xl">
-              <h3 className="text-2xl font-bold text-slate-800 mb-6 flex items-center gap-2">
+            <Card className="rounded-lg border-slate-200 p-6 shadow-xl shadow-slate-200/80">
+              <h3 className="gsl-display text-2xl font-black text-slate-950 mb-6 flex items-center gap-2">
                 <Award className="w-6 h-6 text-yellow-600" />
                 Your Badges
               </h3>
@@ -139,7 +147,7 @@ export function Profile() {
                         whileHover={{ scale: 1.05 }}
                         className="relative"
                       >
-                        <Card className="p-6 bg-gradient-to-br from-yellow-50 to-orange-50 border-2 border-yellow-300">
+                        <Card className="gsl-card-shine rounded-lg p-6 bg-gradient-to-br from-yellow-50 to-orange-50 border-2 border-yellow-300">
                           <div className="text-center">
                             <div className="text-6xl mb-3">{badge.icon}</div>
                             <h4 className="font-bold text-slate-800 mb-2">{badge.name}</h4>
@@ -181,7 +189,7 @@ export function Profile() {
                         animate={{ opacity: 1 }}
                         className="relative"
                       >
-                        <Card className="p-6 bg-slate-100 border-2 border-slate-200 opacity-75">
+                        <Card className="rounded-lg p-6 bg-slate-100 border-2 border-slate-200 opacity-75">
                           <div className="text-center">
                             <div className="text-4xl mb-3 grayscale">🔒</div>
                             <h4 className="font-bold text-slate-600 mb-2">{lecture.badge.name}</h4>
@@ -200,9 +208,9 @@ export function Profile() {
             </Card>
 
             {/* Course Progress */}
-            <Card className="p-6 shadow-xl">
-              <h3 className="text-2xl font-bold text-slate-800 mb-6 flex items-center gap-2">
-                <BookOpen className="w-6 h-6 text-teal-600" />
+            <Card className="rounded-lg border-slate-200 p-6 shadow-xl shadow-slate-200/80">
+              <h3 className="gsl-display text-2xl font-black text-slate-950 mb-6 flex items-center gap-2">
+                <BookOpen className="w-6 h-6 text-blue-600" />
                 Course Progress
               </h3>
 
@@ -249,7 +257,7 @@ export function Profile() {
           {/* Statistics Tab */}
           <TabsContent value="stats" className="space-y-6">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-              <Card className="p-6 shadow-lg">
+                <Card className="rounded-lg border-slate-200 p-6 shadow-lg">
                 <div className="flex items-center justify-between mb-2">
                   <Zap className="w-8 h-8 text-yellow-600" />
                 </div>
@@ -257,7 +265,7 @@ export function Profile() {
                 <div className="text-sm text-slate-600">Total XP</div>
               </Card>
 
-              <Card className="p-6 shadow-lg">
+                <Card className="rounded-lg border-slate-200 p-6 shadow-lg">
                 <div className="flex items-center justify-between mb-2">
                   <Target className="w-8 h-8 text-green-600" />
                 </div>
@@ -265,7 +273,7 @@ export function Profile() {
                 <div className="text-sm text-slate-600">Quiz Accuracy</div>
               </Card>
 
-              <Card className="p-6 shadow-lg">
+                <Card className="rounded-lg border-slate-200 p-6 shadow-lg">
                 <div className="flex items-center justify-between mb-2">
                   <Trophy className="w-8 h-8 text-purple-600" />
                 </div>
@@ -273,7 +281,7 @@ export function Profile() {
                 <div className="text-sm text-slate-600">Boss Fights Won</div>
               </Card>
 
-              <Card className="p-6 shadow-lg">
+                <Card className="rounded-lg border-slate-200 p-6 shadow-lg">
                 <div className="flex items-center justify-between mb-2">
                   <BarChart3 className="w-8 h-8 text-blue-600" />
                 </div>
@@ -282,9 +290,9 @@ export function Profile() {
               </Card>
             </div>
 
-            <Card className="p-6 shadow-xl">
-              <h3 className="text-2xl font-bold text-slate-800 mb-6 flex items-center gap-2">
-                <TrendingUp className="w-6 h-6 text-teal-600" />
+            <Card className="rounded-lg border-slate-200 p-6 shadow-xl shadow-slate-200/80">
+              <h3 className="gsl-display text-2xl font-black text-slate-950 mb-6 flex items-center gap-2">
+                <TrendingUp className="w-6 h-6 text-blue-600" />
                 Detailed Statistics
               </h3>
 
@@ -332,8 +340,8 @@ export function Profile() {
             </Card>
 
             {/* Quick Actions */}
-            <Card className="p-6 shadow-xl">
-              <h3 className="text-lg font-bold text-slate-800 mb-4">Quick Actions</h3>
+            <Card className="rounded-lg border-slate-200 p-6 shadow-xl shadow-slate-200/80">
+              <h3 className="gsl-subhead text-lg font-extrabold text-slate-950 mb-4">Quick Actions</h3>
               <div className="flex flex-wrap gap-3">
                 <Button
                   onClick={() => navigate('/dashboard')}

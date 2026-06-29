@@ -1,204 +1,288 @@
- import { motion } from 'motion/react';
+import { motion } from 'motion/react';
 import { useNavigate } from 'react-router';
 import { Button } from '../components/ui/button';
-import { ContainerScrollAnimation } from '../components/ui/container-scroll-animation';
-import { ImageWithFallback } from '../components/figma/ImageWithFallback';
-import { Sparkles, Rocket, Trophy, Target } from 'lucide-react';
+import {
+  Award,
+  Beaker,
+  BookOpen,
+  BrainCircuit,
+  ChevronRight,
+  Cpu,
+  Droplets,
+  HelpCircle,
+  Lightbulb,
+  LockKeyhole,
+  Rocket,
+  ShieldCheck,
+  Sparkles,
+  Trophy,
+  Wrench,
+  Zap
+} from 'lucide-react';
+
+const programs = [
+  {
+    icon: Droplets,
+    title: 'Smart Irrigation Lab',
+    text: 'Build an Arduino soil sensor, decode moisture values, and defend your plant from Professor Dryroot.',
+    reward: '120 XP'
+  },
+  {
+    icon: Lightbulb,
+    title: 'Smart City Circuits',
+    text: 'Prototype street lights, sensors, and automation logic for safer, energy-aware cities.',
+    reward: 'Coming next'
+  },
+  {
+    icon: BrainCircuit,
+    title: 'Mission Control Basics',
+    text: 'Learn loops, logic, debugging, and data through hands-on experiments that feel like play.',
+    reward: 'Skill path'
+  }
+];
+
+const journey = [
+  'Choose a STEM mission',
+  'Learn through story chapters',
+  'Solve quick checkpoints',
+  'Win the boss fight',
+  'Unlock badges and XP'
+];
+
+const faqs = [
+  ['Is GetsetLearn for beginners?', 'Yes. Missions start with simple ideas and grow into real project thinking.'],
+  ['Does it include quizzes?', 'Every chapter includes checkpoints, XP rewards, and a final boss fight assessment.'],
+  ['What makes it practical?', 'Students build around sensors, circuits, code, testing, and real-world use cases.']
+];
 
 export function Landing() {
   const navigate = useNavigate();
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#0F766E] via-[#115E59] to-[#134E4A] overflow-hidden">
-      {/* Floating orbs */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <motion.div
-          className="absolute top-20 left-10 w-64 h-64 bg-teal-400/20 rounded-full blur-3xl"
-          animate={{
-            x: [0, 100, 0],
-            y: [0, -50, 0],
-          }}
-          transition={{
-            duration: 20,
-            repeat: Infinity,
-            ease: "linear"
-          }}
-        />
-        <motion.div
-          className="absolute bottom-20 right-10 w-96 h-96 bg-teal-300/20 rounded-full blur-3xl"
-          animate={{
-            x: [0, -100, 0],
-            y: [0, 50, 0],
-          }}
-          transition={{
-            duration: 25,
-            repeat: Infinity,
-            ease: "linear"
-          }}
-        />
-        <motion.div
-          className="absolute top-1/2 left-1/2 w-80 h-80 bg-cyan-400/10 rounded-full blur-3xl"
-          animate={{
-            scale: [1, 1.2, 1],
-            rotate: [0, 180, 360],
-          }}
-          transition={{
-            duration: 30,
-            repeat: Infinity,
-            ease: "linear"
-          }}
-        />
-      </div>
+    <div className="gsl-platform min-h-screen bg-[#F8FAFC] text-slate-900">
+      <header className="fixed inset-x-0 top-0 z-40 border-b border-white/10 bg-slate-950/70 backdrop-blur-xl">
+        <nav className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3">
+          <button onClick={() => navigate('/')} className="flex items-center gap-3 text-left">
+            <span className="flex h-10 w-10 items-center justify-center rounded-lg bg-gradient-to-br from-blue-600 to-violet-600 text-white shadow-lg shadow-blue-900/30">
+              <Sparkles className="h-5 w-5" />
+            </span>
+            <span>
+              <span className="gsl-display block text-lg font-black leading-none text-white">GetsetLearn</span>
+              <span className="text-xs font-semibold uppercase tracking-[0.18em] text-blue-200">Learn by Doing</span>
+            </span>
+          </button>
 
-      {/* Navigation Header */}
-      <nav className="absolute top-0 left-0 right-0 z-20 flex items-center justify-between px-6 py-4">
-        <motion.div
-          initial={{ opacity: 0, x: -20 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.5 }}
-          className="flex items-center gap-2"
-        >
-          <div className="w-10 h-10 bg-gradient-to-br from-teal-400 to-cyan-400 rounded-lg flex items-center justify-center">
-            <Sparkles className="w-5 h-5 text-white" />
+          <div className="hidden items-center gap-6 text-sm font-semibold text-slate-200 md:flex">
+            <a href="#programs" className="hover:text-white">Programs</a>
+            <a href="#journey" className="hover:text-white">Journey</a>
+            <a href="#faq" className="hover:text-white">FAQ</a>
           </div>
-          <span className="text-xl font-bold text-white">LearnQuest</span>
-        </motion.div>
-        <motion.div
-          initial={{ opacity: 0, x: 20 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.5 }}
-        >
-          <Button
-            variant="ghost"
-            onClick={() => navigate('/login')}
-            className="text-white hover:bg-white/10 border border-white/20 rounded-full px-6"
-          >
+
+          <Button onClick={() => navigate('/login')} className="gsl-ripple rounded-md bg-white text-slate-950 hover:bg-blue-50">
             Sign In
           </Button>
-        </motion.div>
-      </nav>
+        </nav>
+      </header>
 
-      {/* Hero Section */}
-      <div className="relative z-10 min-h-screen flex flex-col items-center justify-center px-4 pt-20 pb-12">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="text-center w-full max-w-5xl mx-auto"
-        >
-          <motion.div
-            className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full mb-6 border border-white/20"
-            whileHover={{ scale: 1.05 }}
-          >
-            <Sparkles className="w-4 h-4 text-yellow-300" />
-            <span className="text-sm text-white/90">Welcome to the Future of Learning</span>
-          </motion.div>
-          
-          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-white mb-4 md:mb-6 leading-tight">
-            Start your
-            <br />
-            <span className="bg-gradient-to-r from-teal-200 via-cyan-200 to-teal-300 bg-clip-text text-transparent">
-              Learning Adventure
-            </span>
-          </h1>
-          
-          <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-teal-100 max-w-xl md:max-w-2xl mx-auto mb-6 md:mb-8 px-2">
-            Explore, Build, Experiment, and Learn through immersive STEM experiences.
-          </p>
+      <main>
+        <section className="gsl-aurora relative min-h-screen overflow-hidden px-4 pb-20 pt-28 text-white">
+          <div className="absolute inset-0 gsl-circuit opacity-80" />
+          <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(15,23,42,0.1),rgba(15,23,42,0.92))]" />
 
-          <motion.div
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            <Button
-              size="lg"
-              onClick={() => navigate('/intro')}
-              className="rounded-full px-6 md:px-8 py-4 md:py-6 text-base md:text-lg bg-white text-teal-700 hover:bg-teal-50 shadow-2xl hover:shadow-teal-500/50 transition-all duration-300 w-full sm:w-auto"
-            >
-              <Rocket className="mr-2 h-4 w-4 md:h-5 md:w-5" />
-              Get Started
-            </Button>
-          </motion.div>
-        </motion.div>
-
-        {/* Animated Features */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.5, duration: 1 }}
-          className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 md:gap-6 max-w-4xl w-full mt-12 md:mt-16"
-        >
           {[
-            { icon: Target, title: 'Interactive Lessons', desc: 'Hands-on learning that sticks' },
-            { icon: Trophy, title: 'Earn Rewards', desc: 'Badges, XP, and achievements' },
-            { icon: Sparkles, title: 'Boss Battles', desc: 'Test your skills in epic challenges' }
-          ].map((feature, i) => (
+            { Icon: Cpu, className: 'left-[8%] top-[22%]' },
+            { Icon: Beaker, className: 'right-[12%] top-[20%]' },
+            { Icon: Zap, className: 'bottom-[20%] left-[14%]' },
+            { Icon: Wrench, className: 'bottom-[25%] right-[18%]' }
+          ].map(({ Icon, className }, index) => (
             <motion.div
-              key={i}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.7 + i * 0.2 }}
-              whileHover={{ y: -5, scale: 1.02 }}
-              className="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-4 md:p-6 text-center hover:bg-white/15 transition-all duration-300"
+              key={className}
+              className={`absolute hidden h-14 w-14 items-center justify-center rounded-lg border border-white/15 bg-white/10 text-blue-100 backdrop-blur-md md:flex ${className}`}
+              animate={{ y: [0, -14, 0], rotate: [0, 4, -4, 0] }}
+              transition={{ duration: 5 + index, repeat: Infinity, ease: 'easeInOut' }}
             >
-              <div className="inline-flex items-center justify-center w-12 h-12 md:w-16 md:h-16 bg-teal-400/20 rounded-full mb-3 md:mb-4">
-                <feature.icon className="w-6 h-6 md:w-8 md:h-8 text-teal-200" />
-              </div>
-              <h3 className="text-lg md:text-xl font-semibold text-white mb-1 md:mb-2">{feature.title}</h3>
-              <p className="text-sm md:text-base text-teal-100">{feature.desc}</p>
+              <Icon className="h-7 w-7" />
             </motion.div>
           ))}
-        </motion.div>
-      </div>
 
-      {/* Scroll Section with Image */}
-      <ContainerScrollAnimation
-        titleComponent={
-          <div className="px-4">
-            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-white mb-3 md:mb-4">
-              Build Real Projects
-            </h2>
-            <p className="text-base sm:text-lg md:text-xl text-teal-100 max-w-xl md:max-w-2xl mx-auto px-2">
-              Learn Arduino, robotics, and electronics through hands-on projects that make a difference
-            </p>
-          </div>
-        }
-      >
-        <div className="relative w-full max-w-5xl mx-auto rounded-2xl md:rounded-3xl overflow-hidden shadow-2xl border-2 md:border-4 border-white/20">
-          <div className="absolute inset-0 bg-gradient-to-br from-teal-500/20 to-cyan-500/20 z-10" />
-          <ImageWithFallback
-            src="https://images.unsplash.com/photo-1507146153580-69a1fe6d8aa1?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-            alt="Arduino electronics and robotics"
-            className="w-full h-[250px] sm:h-[300px] md:h-[400px] lg:h-[500px] object-cover"
-          />
-        </div>
-      </ContainerScrollAnimation>
+          <div className="relative z-10 mx-auto grid min-h-[calc(100vh-7rem)] max-w-7xl items-center gap-10 lg:grid-cols-[1.03fr_0.97fr]">
+            <motion.div initial={{ opacity: 0, y: 26 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }}>
+              <div className="mb-5 inline-flex items-center gap-2 rounded-md border border-blue-300/30 bg-blue-500/10 px-3 py-2 text-sm font-semibold text-blue-100">
+                <ShieldCheck className="h-4 w-4 text-emerald-300" />
+                Premium STEM missions for K-12 builders
+              </div>
+              <h1 className="gsl-display max-w-5xl text-5xl font-black leading-[1.02] sm:text-6xl lg:text-7xl">
+                GetsetLearn
+                <span className="block bg-gradient-to-r from-blue-200 via-white to-violet-200 bg-clip-text text-transparent">
+                  Learn by Building. Learn by Doing.
+                </span>
+              </h1>
+              <p className="mt-6 max-w-2xl text-lg leading-8 text-slate-200">
+                Mission-based Arduino, robotics, and practical STEM learning with XP, badges, checkpoints, and cinematic boss fights.
+              </p>
+              <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+                <Button onClick={() => navigate('/intro')} size="lg" className="gsl-ripple rounded-md bg-blue-600 px-7 py-6 text-base font800 hover:bg-blue-500">
+                  <Rocket className="mr-2 h-5 w-5" />
+                  Start Mission
+                </Button>
+                <Button onClick={() => navigate('/dashboard')} size="lg" variant="outline" className="rounded-md border-white/25 bg-white/10 px-7 py-6 text-base text-white hover:bg-white/15 hover:text-white">
+                  View Programs
+                  <ChevronRight className="ml-2 h-5 w-5" />
+                </Button>
+              </div>
 
-      {/* Bottom CTA */}
-      <div className="relative z-10 py-12 md:py-20 text-center px-4">
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          transition={{ duration: 1 }}
-          viewport={{ once: true }}
-        >
-          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4 md:mb-6">
-            Ready to Begin Your Journey?
-          </h2>
-          <motion.div
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            <Button
-              size="lg"
-              onClick={() => navigate('/intro')}
-              className="rounded-full px-6 md:px-8 py-4 md:py-6 text-base md:text-lg bg-gradient-to-r from-teal-400 to-cyan-400 text-teal-900 hover:from-teal-300 hover:to-cyan-300 shadow-2xl w-full sm:w-auto"
+              <div className="mt-10 grid max-w-xl grid-cols-3 gap-3">
+                {[
+                  ['10+', 'Mission chapters'],
+                  ['275', 'Course XP'],
+                  ['1', 'Boss arena']
+                ].map(([value, label]) => (
+                  <div key={label} className="rounded-lg border border-white/15 bg-white/10 p-4 backdrop-blur-md">
+                    <div className="gsl-display text-2xl font-black">{value}</div>
+                    <div className="text-xs font-semibold uppercase tracking-wide text-slate-300">{label}</div>
+                  </div>
+                ))}
+              </div>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, scale: 0.94, rotateX: 8 }}
+              animate={{ opacity: 1, scale: 1, rotateX: 0 }}
+              transition={{ duration: 0.8, delay: 0.1 }}
+              className="gsl-float relative"
             >
-              Start Learning Now
-            </Button>
-          </motion.div>
-        </motion.div>
-      </div>
+              <div className="relative rounded-lg border border-white/15 bg-slate-900/70 p-5 shadow-2xl shadow-blue-950/60 backdrop-blur-xl">
+                <div className="mb-4 flex items-center justify-between">
+                  <div>
+                    <p className="text-xs font-bold uppercase tracking-[0.2em] text-blue-200">Mission 3</p>
+                    <h2 className="gsl-subhead text-2xl font-extrabold">Soil Sensor Lab</h2>
+                  </div>
+                  <span className="rounded-md bg-amber-400 px-3 py-1 text-sm font-black text-slate-950">+120 XP</span>
+                </div>
+                <div className="aspect-[4/3] rounded-lg border border-blue-300/20 bg-gradient-to-br from-slate-800 via-blue-950 to-violet-950 p-5">
+                  <div className="relative h-full rounded-md gsl-circuit bg-slate-950/40">
+                    <div className="absolute left-6 top-6 rounded-md bg-emerald-400/20 p-4 text-emerald-200">
+                      <Droplets className="h-10 w-10" />
+                    </div>
+                    <div className="absolute bottom-6 right-6 rounded-md bg-violet-400/20 p-4 text-violet-100">
+                      <Cpu className="h-14 w-14" />
+                    </div>
+                    <div className="absolute left-1/2 top-1/2 h-24 w-24 -translate-x-1/2 -translate-y-1/2 rounded-full border-4 border-blue-300/30 bg-blue-400/20 gsl-pulse" />
+                  </div>
+                </div>
+                <div className="mt-4 grid grid-cols-3 gap-3 text-sm">
+                  {['Sensor input', 'If-else logic', 'Boss ready'].map((item) => (
+                    <div key={item} className="rounded-md bg-white/10 p-3 text-center font-semibold text-slate-200">{item}</div>
+                  ))}
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        </section>
+
+        <section className="mx-auto max-w-7xl px-4 py-20">
+          <div className="grid gap-6 lg:grid-cols-[0.9fr_1.1fr]">
+            <div>
+              <p className="gsl-subhead text-sm font-extrabold uppercase tracking-[0.22em] text-blue-600">Our Mission</p>
+              <h2 className="gsl-display mt-3 text-4xl font-black text-slate-950">Making practical learning accessible to every K-12 student.</h2>
+            </div>
+            <div className="grid gap-4 sm:grid-cols-2">
+              {[
+                ['Why practical learning matters', 'Students remember concepts when they can wire, test, debug, and explain what they built.'],
+                ['Modern STEM museum energy', 'Every screen is designed around curiosity, movement, feedback, and a clear next action.']
+              ].map(([title, text]) => (
+                <div key={title} className="rounded-lg border border-slate-200 bg-white p-6 shadow-sm">
+                  <h3 className="gsl-subhead text-xl font-extrabold text-slate-950">{title}</h3>
+                  <p className="mt-3 leading-7 text-slate-600">{text}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section id="programs" className="bg-slate-950 px-4 py-20 text-white">
+          <div className="mx-auto max-w-7xl">
+            <div className="mb-10 flex flex-col justify-between gap-4 md:flex-row md:items-end">
+              <div>
+                <p className="gsl-subhead text-sm font-extrabold uppercase tracking-[0.22em] text-emerald-300">Featured STEM Programs</p>
+                <h2 className="gsl-display mt-3 text-4xl font-black">Project missions with real rewards</h2>
+              </div>
+              <Button onClick={() => navigate('/dashboard')} className="rounded-md bg-white text-slate-950 hover:bg-blue-50">
+                Open Learning Dashboard
+              </Button>
+            </div>
+            <div className="grid gap-5 md:grid-cols-3">
+              {programs.map((program) => (
+                <div key={program.title} className="gsl-card-shine gsl-tilt rounded-lg border border-white/10 bg-white/[0.06] p-6 shadow-xl shadow-black/20">
+                  <program.icon className="h-10 w-10 text-blue-200" />
+                  <h3 className="gsl-subhead mt-5 text-2xl font-extrabold">{program.title}</h3>
+                  <p className="mt-3 min-h-24 leading-7 text-slate-300">{program.text}</p>
+                  <div className="mt-5 inline-flex rounded-md bg-blue-500/15 px-3 py-2 text-sm font-bold text-blue-100">{program.reward}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section id="journey" className="mx-auto max-w-7xl px-4 py-20">
+          <div className="grid gap-8 lg:grid-cols-[0.8fr_1.2fr]">
+            <div>
+              <p className="gsl-subhead text-sm font-extrabold uppercase tracking-[0.22em] text-violet-600">Learning Journey</p>
+              <h2 className="gsl-display mt-3 text-4xl font-black">A clear path from curiosity to confidence.</h2>
+            </div>
+            <div className="grid gap-3">
+              {journey.map((step, index) => (
+                <div key={step} className="flex items-center gap-4 rounded-lg border border-slate-200 bg-white p-4 shadow-sm">
+                  <span className="flex h-11 w-11 items-center justify-center rounded-md bg-gradient-to-br from-blue-600 to-violet-600 font-black text-white">{index + 1}</span>
+                  <span className="gsl-subhead text-lg font-extrabold text-slate-800">{step}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section className="bg-white px-4 py-20">
+          <div className="mx-auto grid max-w-7xl gap-5 md:grid-cols-3">
+            {[
+              [Trophy, 'Student Achievements', 'XP streaks, badges, boss wins, and project completion make progress visible.'],
+              [Award, 'Certificate Preview', 'Learners can see the practical skills they are building toward.'],
+              [HelpCircle, 'Parent Testimonials', 'Designed to feel rigorous, joyful, and useful beyond the classroom.']
+            ].map(([Icon, title, text]) => (
+              <div key={title as string} className="rounded-lg border border-slate-200 bg-[#F8FAFC] p-6">
+                <Icon className="h-9 w-9 text-blue-600" />
+                <h3 className="gsl-subhead mt-4 text-xl font-extrabold">{title as string}</h3>
+                <p className="mt-3 leading-7 text-slate-600">{text as string}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <section id="faq" className="mx-auto max-w-4xl px-4 py-20">
+          <h2 className="gsl-display text-center text-4xl font-black">FAQ</h2>
+          <div className="mt-8 space-y-3">
+            {faqs.map(([question, answer]) => (
+              <div key={question} className="rounded-lg border border-slate-200 bg-white p-5 shadow-sm">
+                <h3 className="gsl-subhead font-extrabold text-slate-950">{question}</h3>
+                <p className="mt-2 text-slate-600">{answer}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <section className="px-4 pb-20">
+          <div className="mx-auto max-w-7xl rounded-lg bg-gradient-to-r from-blue-600 via-violet-600 to-slate-950 p-8 text-white shadow-2xl">
+            <div className="flex flex-col items-start justify-between gap-5 md:flex-row md:items-center">
+              <div>
+                <h2 className="gsl-display text-3xl font-black">Ready for your next practical STEM mission?</h2>
+                <p className="mt-2 text-blue-100">Build, test, quiz, win the boss fight, and collect your badge.</p>
+              </div>
+              <Button onClick={() => navigate('/intro')} className="rounded-md bg-white text-slate-950 hover:bg-blue-50">
+                Launch GetsetLearn
+              </Button>
+            </div>
+          </div>
+        </section>
+      </main>
     </div>
   );
 }

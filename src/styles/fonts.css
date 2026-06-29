@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=Orbitron:wght@600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=Inter:wght@400;500;600;700;800&family=Orbitron:wght@600;700;800&family=Outfit:wght@500;600;700;800&family=Poppins:wght@700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap');
 
 .font-lab-display {
   font-family: 'Orbitron', 'Chakra Petch', system-ui, sans-serif;
@@ -10,6 +10,116 @@
 
 .font-lab-control {
   font-family: 'Chakra Petch', 'Space Grotesk', system-ui, sans-serif;
+}
+
+.gsl-platform {
+  font-family: 'Inter', system-ui, sans-serif;
+}
+
+.gsl-display {
+  font-family: 'Poppins', 'Outfit', system-ui, sans-serif;
+}
+
+.gsl-subhead {
+  font-family: 'Outfit', 'Inter', system-ui, sans-serif;
+}
+
+.gsl-circuit {
+  background-image:
+    linear-gradient(rgba(37, 99, 235, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(124, 58, 237, 0.07) 1px, transparent 1px),
+    radial-gradient(circle at 16px 16px, rgba(245, 158, 11, 0.2) 2px, transparent 2.5px);
+  background-size: 42px 42px, 42px 42px, 84px 84px;
+  animation: gsl-circuit-drift 24s linear infinite;
+}
+
+.gsl-aurora {
+  background:
+    radial-gradient(circle at 20% 20%, rgba(37, 99, 235, 0.28), transparent 28%),
+    radial-gradient(circle at 80% 18%, rgba(124, 58, 237, 0.26), transparent 30%),
+    radial-gradient(circle at 60% 85%, rgba(16, 185, 129, 0.2), transparent 34%),
+    linear-gradient(135deg, #0f172a 0%, #1e293b 48%, #111827 100%);
+  background-size: 140% 140%;
+  animation: gsl-aurora-shift 18s ease-in-out infinite alternate;
+}
+
+.gsl-card-shine {
+  position: relative;
+  overflow: hidden;
+}
+
+.gsl-card-shine::after {
+  content: '';
+  position: absolute;
+  inset: -120% auto auto -80%;
+  width: 70%;
+  height: 240%;
+  transform: rotate(24deg);
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.18), transparent);
+  transition: transform 0.7s ease;
+}
+
+.gsl-card-shine:hover::after {
+  transform: translateX(360%) rotate(24deg);
+}
+
+.gsl-tilt {
+  transform-style: preserve-3d;
+  transition: transform 220ms ease, box-shadow 220ms ease;
+}
+
+.gsl-tilt:hover {
+  transform: perspective(900px) rotateX(2deg) rotateY(-4deg) translateY(-6px);
+}
+
+.gsl-float {
+  animation: gsl-float 5s ease-in-out infinite;
+}
+
+.gsl-pulse {
+  animation: gsl-pulse 2.6s ease-in-out infinite;
+}
+
+.gsl-ripple {
+  position: relative;
+  overflow: hidden;
+}
+
+.gsl-ripple::before {
+  content: '';
+  position: absolute;
+  inset: 50% auto auto 50%;
+  width: 0;
+  height: 0;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.28);
+  transform: translate(-50%, -50%);
+  transition: width 0.45s ease, height 0.45s ease;
+}
+
+.gsl-ripple:hover::before {
+  width: 220%;
+  height: 220%;
+}
+
+@keyframes gsl-circuit-drift {
+  from { background-position: 0 0, 0 0, 0 0; }
+  to { background-position: 42px 42px, -42px 42px, 84px 84px; }
+}
+
+@keyframes gsl-aurora-shift {
+  from { background-position: 0% 50%; }
+  to { background-position: 100% 50%; }
+}
+
+@keyframes gsl-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+}
+
+@keyframes gsl-pulse {
+  0%, 100% { box-shadow: 0 0 0 rgba(37, 99, 235, 0); }
+  50% { box-shadow: 0 0 32px rgba(37, 99, 235, 0.36); }
 }
 
 .escape-room-shell {
@@ -105,6 +215,10 @@
 
 @media (prefers-reduced-motion: reduce) {
   .lab-grid-overlay,
+  .gsl-circuit,
+  .gsl-aurora,
+  .gsl-float,
+  .gsl-pulse,
   .lab-scanline,
   .lab-float,
   .lab-pulse,

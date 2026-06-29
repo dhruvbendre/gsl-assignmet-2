@@ -241,11 +241,13 @@ export function Dashboard() {
   };
 
   const currentComponents = course.id ? (componentsRequired[course.id] || []) : [];
+  const missionStory = `Sprouty the plant is counting on your engineering team. Mission ${currentChapter.number} teaches the sensor, circuit, or code decision needed to keep the smart garden alive.`;
 
   return (
-    <div className="bg-gradient-to-br from-slate-50 to-teal-50 lg:min-h-screen">
+    <div className="gsl-platform min-h-screen bg-[#F8FAFC] text-slate-900">
+      <div className="pointer-events-none fixed inset-0 gsl-circuit opacity-50" />
       {/* Header */}
-      <header className="bg-gradient-to-r from-[#0F766E] to-[#14B8A6] border-b border-teal-600 sticky top-0 z-40 shadow-lg">
+      <header className="sticky top-0 z-40 border-b border-white/10 bg-slate-950/90 shadow-lg backdrop-blur-xl">
         <div className="max-w-7xl mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-4">
@@ -258,13 +260,13 @@ export function Dashboard() {
                 {sidebarOpen ? <X /> : <Menu />}
               </Button>
               <div>
-                <h1 className="text-2xl font-bold text-white">{course.title}</h1>
-                <p className="text-teal-100 text-sm">Chapter {currentChapter.number}: {currentChapter.title}</p>
+                <h1 className="gsl-display text-2xl font-black text-white">{course.title}</h1>
+                <p className="text-blue-100 text-sm font-medium">Mission {currentChapter.number}: {currentChapter.title}</p>
               </div>
             </div>
             
             <div className="flex items-center gap-2">
-              <div className="hidden md:flex items-center gap-2 bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full">
+              <div className="hidden md:flex items-center gap-2 rounded-md bg-white/10 backdrop-blur-sm px-4 py-2">
                 <Zap className="w-5 h-5 text-yellow-300" />
                 <span className="text-white font-bold">{progress?.totalXP || 0} XP</span>
               </div>
@@ -316,13 +318,13 @@ export function Dashboard() {
         </div>
       </header>
 
-      <div className="max-w-7xl mx-auto px-4 py-6">
+      <div className="relative max-w-7xl mx-auto px-4 py-6">
         {/* Back to Dashboard Button */}
         <div className="mb-4">
           <Button
             variant="ghost"
             onClick={() => navigate('/dashboard')}
-            className="text-slate-600 hover:text-teal-600 hover:bg-teal-50"
+            className="rounded-md text-slate-600 hover:text-blue-700 hover:bg-blue-50"
             size="sm"
           >
             <ArrowLeft className="w-4 h-4 mr-2" />
@@ -341,10 +343,10 @@ export function Dashboard() {
                 className="w-full lg:w-80 flex-shrink-0 fixed lg:static inset-y-0 left-0 z-30 lg:z-0 bg-white lg:bg-transparent"
               >
                 <ScrollArea className="h-[calc(100vh-200px)] lg:h-auto">
-                  <Card className="p-4 shadow-xl">
-                    <h2 className="text-lg font-bold text-teal-700 mb-4 flex items-center gap-2">
+                  <Card className="rounded-lg border-slate-200 p-4 shadow-xl shadow-slate-200/70">
+                    <h2 className="gsl-subhead text-lg font-extrabold text-slate-950 mb-4 flex items-center gap-2">
                       <BookOpen className="w-5 h-5" />
-                      Chapters
+                      Mission Roadmap
                     </h2>
                     <div className="space-y-2">
                       {course.chapters.map((chapter) => {
@@ -361,9 +363,9 @@ export function Dashboard() {
                             disabled={!unlocked}
                             className={`w-full text-left p-3 rounded-lg transition-all ${
                               isCurrent
-                                ? 'bg-gradient-to-r from-teal-500 to-cyan-500 text-white shadow-lg'
+                                ? 'bg-gradient-to-r from-blue-600 to-violet-600 text-white shadow-lg'
                                 : unlocked
-                                ? 'bg-slate-50 hover:bg-slate-100 text-slate-700'
+                                ? 'bg-slate-50 hover:bg-blue-50 text-slate-700'
                                 : 'bg-slate-100 text-slate-400 cursor-not-allowed'
                             }`}
                           >
@@ -398,7 +400,7 @@ export function Dashboard() {
                         disabled={!allChaptersComplete}
                         className={`w-full text-left p-4 rounded-lg transition-all mt-4 ${
                           allChaptersComplete
-                            ? 'bg-gradient-to-r from-purple-600 to-pink-600 text-white shadow-lg hover:shadow-xl'
+                            ? 'bg-gradient-to-r from-violet-600 to-fuchsia-600 text-white shadow-lg hover:shadow-xl'
                             : 'bg-slate-100 text-slate-400 cursor-not-allowed'
                         }`}
                       >
@@ -417,7 +419,7 @@ export function Dashboard() {
                       {currentComponents.length > 0 && (
                         <div className="mt-4 p-4 bg-slate-50 rounded-lg border border-slate-200">
                           <div className="flex items-center gap-2 mb-3">
-                            <Wrench className="w-5 h-5 text-teal-600" />
+                            <Wrench className="w-5 h-5 text-blue-600" />
                             <h3 className="font-bold text-slate-800 text-sm">Components Required</h3>
                           </div>
                           <ul className="space-y-1.5">
@@ -439,39 +441,48 @@ export function Dashboard() {
 
           {/* Main Content - Lesson */}
           <div className="flex-1 min-w-0">
-            <Card className="p-6 lg:p-8 shadow-xl">
+            <Card className="overflow-hidden rounded-lg border-slate-200 p-0 shadow-xl shadow-slate-200/80">
               <motion.div
                 key={currentChapter.id}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.3 }}
               >
-                <div className="mb-6">
-                  <Badge className="mb-2 bg-teal-100 text-teal-700 hover:bg-teal-200">
-                    Chapter {currentChapter.number}
-                  </Badge>
-                  <h2 className="text-3xl font-bold text-slate-800 mb-4">
-                    {currentChapter.title}
-                  </h2>
+                <div className="relative bg-slate-950 p-6 text-white lg:p-8">
+                  <div className="absolute inset-0 gsl-circuit opacity-30" />
+                  <div className="relative grid gap-5 md:grid-cols-[1fr_auto] md:items-start">
+                    <div>
+                      <Badge className="mb-3 rounded-md bg-blue-500/20 text-blue-100 hover:bg-blue-500/20">
+                        Mission {currentChapter.number} • {currentChapter.quiz.xpReward} XP checkpoint
+                      </Badge>
+                      <h2 className="gsl-display text-3xl font-black leading-tight md:text-4xl">
+                        {currentChapter.title}
+                      </h2>
+                      <p className="mt-4 max-w-2xl text-slate-300">{missionStory}</p>
+                    </div>
+                    <div className="gsl-float flex h-28 w-28 items-center justify-center rounded-lg border border-white/15 bg-white/10 text-6xl">
+                      {lecture?.icon || 'STEM'}
+                    </div>
+                  </div>
                 </div>
 
-                <div className="space-y-6">
+                <div className="space-y-6 p-6 lg:p-8">
                   {/* Learning Objective */}
-                  <div className="bg-gradient-to-r from-teal-50 to-cyan-50 p-4 rounded-xl border-l-4 border-teal-500">
+                  <div className="rounded-lg border border-blue-100 bg-gradient-to-r from-blue-50 to-violet-50 p-5">
                     <div className="flex items-start gap-3">
-                      <Target className="w-6 h-6 text-teal-600 mt-1 flex-shrink-0" />
+                      <Target className="w-6 h-6 text-blue-600 mt-1 flex-shrink-0" />
                       <div>
-                        <h3 className="font-semibold text-teal-900 mb-1">Learning Objective</h3>
-                        <p className="text-teal-800">{currentChapter.learningObjective}</p>
+                        <h3 className="gsl-subhead font-extrabold text-blue-950 mb-1">What you'll learn</h3>
+                        <p className="text-blue-900">{currentChapter.learningObjective}</p>
                       </div>
                     </div>
                   </div>
 
                   {/* Explanation */}
                   <div>
-                    <h3 className="font-semibold text-slate-800 mb-2 flex items-center gap-2">
+                    <h3 className="gsl-subhead font-extrabold text-slate-900 mb-2 flex items-center gap-2">
                       <BookOpen className="w-5 h-5 text-blue-600" />
-                      Let's Learn!
+                      Story Brief
                     </h3>
                     <p className="text-slate-700 leading-relaxed">
                       {currentChapter.explanation}
@@ -479,8 +490,9 @@ export function Dashboard() {
                   </div>
 
                   {/* STEM Concept */}
-                  <div className="bg-blue-50 p-4 rounded-xl">
-                    <h3 className="font-semibold text-blue-900 mb-2 flex items-center gap-2">
+                  <div className="grid gap-4 md:grid-cols-2">
+                  <div className="bg-blue-50 p-4 rounded-lg border border-blue-100">
+                    <h3 className="gsl-subhead font-extrabold text-blue-900 mb-2 flex items-center gap-2">
                       <Lightbulb className="w-5 h-5 text-blue-600" />
                       STEM Concept
                     </h3>
@@ -488,30 +500,41 @@ export function Dashboard() {
                   </div>
 
                   {/* Fun Fact */}
-                  <div className="bg-amber-50 p-4 rounded-xl">
-                    <h3 className="font-semibold text-amber-900 mb-2 flex items-center gap-2">
+                  <div className="bg-amber-50 p-4 rounded-lg border border-amber-100">
+                    <h3 className="gsl-subhead font-extrabold text-amber-900 mb-2 flex items-center gap-2">
                       <Flame className="w-5 h-5 text-amber-600" />
-                      Fun Fact
+                      Fun Fact • +20 XP mindset
                     </h3>
                     <p className="text-amber-800">{currentChapter.funFact}</p>
                   </div>
+                  </div>
 
                   {/* Mini Activity */}
-                  <div className="bg-purple-50 p-4 rounded-xl">
-                    <h3 className="font-semibold text-purple-900 mb-2 flex items-center gap-2">
+                  <div className="bg-purple-50 p-4 rounded-lg border border-purple-100">
+                    <h3 className="gsl-subhead font-extrabold text-purple-900 mb-2 flex items-center gap-2">
                       <Award className="w-5 h-5 text-purple-600" />
-                      Mini Activity
+                      Mini Interaction
                     </h3>
                     <p className="text-purple-800">{currentChapter.miniActivity}</p>
                   </div>
 
                   {/* Real World Example */}
-                  <div className="bg-green-50 p-4 rounded-xl">
-                    <h3 className="font-semibold text-green-900 mb-2 flex items-center gap-2">
+                  <div className="bg-green-50 p-4 rounded-lg border border-green-100">
+                    <h3 className="gsl-subhead font-extrabold text-green-900 mb-2 flex items-center gap-2">
                       <Trophy className="w-5 h-5 text-green-600" />
                       Real-World Application
                     </h3>
                     <p className="text-green-800">{currentChapter.realWorldExample}</p>
+                  </div>
+
+                  <div className="flex flex-col gap-3 rounded-lg border border-slate-200 bg-slate-50 p-4 sm:flex-row sm:items-center sm:justify-between">
+                    <div>
+                      <h3 className="gsl-subhead font-extrabold text-slate-950">Checkpoint ready</h3>
+                      <p className="text-sm text-slate-600">Answer the knowledge check to bank XP and unlock the next mission.</p>
+                    </div>
+                    <Badge className="w-fit rounded-md bg-emerald-100 text-emerald-700 hover:bg-emerald-100">
+                      Take Quick Quiz
+                    </Badge>
                   </div>
                 </div>
               </motion.div>

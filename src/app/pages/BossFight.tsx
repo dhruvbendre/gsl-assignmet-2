@@ -4,7 +4,7 @@ import { Button } from '../components/ui/button';
 import { getLectureById } from '../data/lectures';
 import { storage } from '../lib/storage';
 import { useAuth } from '../context/AuthContext';
-import { ArrowLeft } from 'lucide-react';
+import { ArrowLeft, Heart, Shield, Skull, Timer, Trophy, Zap } from 'lucide-react';
 
 const GAME_SAVE_KEY = 'stemEscapeRoomSave';
 const GAME_CONTEXT_KEY = 'stem-boss-fight-context';
@@ -67,7 +67,7 @@ export function BossFight() {
 
   if (!lecture) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-slate-950 text-white">
+      <div className="gsl-platform min-h-screen flex items-center justify-center bg-slate-950 text-white">
         <div className="text-center">
           <p className="mb-4 text-lg font-semibold">Lecture not found.</p>
           <Button onClick={() => navigate('/dashboard')}>Return to Dashboard</Button>
@@ -78,11 +78,13 @@ export function BossFight() {
 
   if (!canLaunch) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-slate-950 p-4 text-white">
-        <div className="max-w-md text-center">
-          <p className="mb-2 text-2xl font-bold">Boss Fight Locked</p>
-          <p className="mb-6 text-slate-300">Complete every chapter before entering the final assessment.</p>
-          <Button onClick={() => navigate(`/learning/${lecture.id}`)}>
+      <div className="gsl-platform relative min-h-screen flex items-center justify-center overflow-hidden bg-slate-950 p-4 text-white">
+        <div className="absolute inset-0 gsl-circuit opacity-40" />
+        <div className="relative max-w-md rounded-lg border border-white/10 bg-white/10 p-8 text-center shadow-2xl backdrop-blur-xl">
+          <Shield className="mx-auto mb-4 h-12 w-12 text-violet-200" />
+          <p className="gsl-display mb-2 text-3xl font-black">Boss Fight Locked</p>
+          <p className="mb-6 text-slate-300">Complete every chapter before entering the final assessment against Professor Dryroot.</p>
+          <Button className="rounded-md bg-blue-600 hover:bg-blue-500" onClick={() => navigate(`/learning/${lecture.id}`)}>
             <ArrowLeft className="mr-2 h-4 w-4" />
             Back to Lecture
           </Button>
@@ -92,7 +94,29 @@ export function BossFight() {
   }
 
   return (
-    <main className="h-screen w-screen overflow-hidden bg-black">
+    <main className="gsl-platform relative h-screen w-screen overflow-hidden bg-black">
+      <div className="pointer-events-none absolute inset-x-0 top-0 z-10 border-b border-white/10 bg-slate-950/75 px-4 py-3 text-white backdrop-blur-md">
+        <div className="mx-auto flex max-w-7xl items-center justify-between gap-4">
+          <div className="min-w-0">
+            <div className="gsl-subhead truncate text-sm font-extrabold uppercase tracking-[0.18em] text-violet-200">Boss Fight Arena</div>
+            <div className="gsl-display truncate text-xl font-black">{lecture.shortTitle}: Professor Dryroot</div>
+          </div>
+          <div className="hidden items-center gap-3 md:flex">
+            <span className="flex items-center gap-1 rounded-md bg-red-500/20 px-3 py-2 text-sm font-bold text-red-100">
+              <Heart className="h-4 w-4" /> Player Hearts
+            </span>
+            <span className="flex items-center gap-1 rounded-md bg-violet-500/20 px-3 py-2 text-sm font-bold text-violet-100">
+              <Skull className="h-4 w-4" /> Boss HP
+            </span>
+            <span className="flex items-center gap-1 rounded-md bg-amber-500/20 px-3 py-2 text-sm font-bold text-amber-100">
+              <Timer className="h-4 w-4" /> Timer
+            </span>
+            <span className="flex items-center gap-1 rounded-md bg-emerald-500/20 px-3 py-2 text-sm font-bold text-emerald-100">
+              <Zap className="h-4 w-4" /> Combo
+            </span>
+          </div>
+        </div>
+      </div>
       {gameUrl ? (
         <iframe
           title={`${lecture.shortTitle} Boss Fight`}
@@ -101,7 +125,12 @@ export function BossFight() {
           allow="autoplay; fullscreen"
         />
       ) : (
-        <div className="flex h-full items-center justify-center text-white">Loading Boss Fight...</div>
+        <div className="flex h-full items-center justify-center text-white">
+          <div className="text-center">
+            <Trophy className="mx-auto mb-4 h-12 w-12 text-amber-300" />
+            <p className="gsl-subhead text-xl font-extrabold">Loading Boss Fight...</p>
+          </div>
+        </div>
       )}
     </main>
   );
