@@ -350,6 +350,7 @@ const Game = {
         this.injectBossHud(scene);
         this.annotateBossQuestions(scene);
         this.injectSoundDock();
+        window.setTimeout(() => document.body.classList.add("boss-game-mode"), 7600);
         if (scene === 6) this.showCinematicIntro();
         this.startQuestionTimer();
     },
@@ -403,7 +404,7 @@ const Game = {
         hud.setAttribute("aria-label", "Boss fight status");
         hud.innerHTML = `
             <div class="hud-panel hud-player">
-                <div class="hud-avatar" aria-hidden="true">🧑‍🔬</div>
+                <div class="hud-avatar" aria-hidden="true">PL</div>
                 <div>
                     <div class="hud-label">Player</div>
                     <div class="hud-title">Getset Engineer</div>
@@ -418,7 +419,7 @@ const Game = {
                 </div>
             </div>
             <div class="hud-panel hud-boss">
-                <div class="sprouty-avatar" aria-hidden="true">🌱</div>
+                <div class="sprouty-avatar" aria-hidden="true">SP</div>
                 <div class="boss-meter">
                     <div class="hud-label">Professor Dryroot</div>
                     <div class="boss-meter-track"><span class="boss-meter-fill"></span></div>
@@ -530,8 +531,12 @@ const Game = {
         ];
         this.typeIntroDialogue(lines, overlay.querySelector("#intro-dialogue"));
 
+        let closed = false;
         const closeIntro = () => {
+            if (closed) return;
+            closed = true;
             sessionStorage.setItem(key, "true");
+            document.body.classList.add("boss-game-mode");
             overlay.animate([
                 { opacity: 1, transform: "scale(1)" },
                 { opacity: 0, transform: "scale(1.04)" }
@@ -542,6 +547,7 @@ const Game = {
 
         overlay.querySelector("#begin-boss-fight")?.addEventListener("click", closeIntro);
         overlay.querySelector("#skip-boss-intro")?.addEventListener("click", closeIntro);
+        window.setTimeout(closeIntro, 7800);
     },
 
     typeIntroDialogue(lines, target) {

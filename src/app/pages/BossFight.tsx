@@ -23,6 +23,7 @@ export function BossFight() {
   const { lectureId } = useParams<{ lectureId: string }>();
   const { userId } = useAuth();
   const [gameUrl, setGameUrl] = useState('');
+  const [gameMode, setGameMode] = useState(false);
 
   const lecture = lectureId ? getLectureById(lectureId) : null;
 
@@ -65,6 +66,13 @@ export function BossFight() {
     setGameUrl(`/boss-fight-game/index.html?lectureId=${encodeURIComponent(lectureId)}`);
   }, [canLaunch, lecture, lectureId, userId]);
 
+  useEffect(() => {
+    if (!gameUrl) return;
+    setGameMode(false);
+    const timer = window.setTimeout(() => setGameMode(true), 7600);
+    return () => window.clearTimeout(timer);
+  }, [gameUrl]);
+
   if (!lecture) {
     return (
       <div className="gsl-platform min-h-screen flex items-center justify-center bg-slate-950 text-white">
@@ -94,34 +102,56 @@ export function BossFight() {
   }
 
   return (
-    <main className="gsl-platform relative h-screen w-screen overflow-hidden bg-black">
-      <div className="pointer-events-none absolute inset-x-0 top-0 z-10 border-b border-white/10 bg-slate-950/75 px-4 py-3 text-white backdrop-blur-md">
+    <main className={`gsl-platform relative h-screen w-screen overflow-hidden bg-black transition-colors duration-1000 ${gameMode ? 'is-game-mode' : ''}`}>
+      <div className="pointer-events-none absolute inset-0 z-[1] bg-[radial-gradient(circle_at_25%_15%,rgba(37,99,235,0.22),transparent_28%),radial-gradient(circle_at_76%_12%,rgba(124,58,237,0.2),transparent_28%),linear-gradient(180deg,rgba(2,6,23,0.28),transparent_28%)]" />
+      <div
+        className={`pointer-events-none absolute inset-x-0 top-0 z-20 border-b border-white/10 bg-slate-950/76 px-4 py-3 text-white shadow-2xl shadow-blue-950/30 backdrop-blur-xl transition-all duration-1000 ease-out ${
+          gameMode ? '-translate-y-full opacity-0 blur-sm' : 'translate-y-0 opacity-100 blur-0'
+        }`}
+        aria-hidden={gameMode}
+      >
         <div className="mx-auto flex max-w-7xl items-center justify-between gap-4">
           <div className="min-w-0">
             <div className="gsl-subhead truncate text-sm font-extrabold uppercase tracking-[0.18em] text-violet-200">Boss Fight Arena</div>
             <div className="gsl-display truncate text-xl font-black">{lecture.shortTitle}: Professor Dryroot</div>
           </div>
           <div className="hidden items-center gap-3 md:flex">
-            <span className="flex items-center gap-1 rounded-md bg-red-500/20 px-3 py-2 text-sm font-bold text-red-100">
-              <Heart className="h-4 w-4" /> Player Hearts
-            </span>
-            <span className="flex items-center gap-1 rounded-md bg-violet-500/20 px-3 py-2 text-sm font-bold text-violet-100">
-              <Skull className="h-4 w-4" /> Boss HP
-            </span>
-            <span className="flex items-center gap-1 rounded-md bg-amber-500/20 px-3 py-2 text-sm font-bold text-amber-100">
-              <Timer className="h-4 w-4" /> Timer
-            </span>
-            <span className="flex items-center gap-1 rounded-md bg-emerald-500/20 px-3 py-2 text-sm font-bold text-emerald-100">
-              <Zap className="h-4 w-4" /> Combo
-            </span>
+            {[
+              { icon: Heart, label: 'Hearts', value: '3', tone: 'text-red-100', bar: 'from-red-400 to-rose-500' },
+              { icon: Skull, label: 'Boss HP', value: '100%', tone: 'text-violet-100', bar: 'from-violet-400 to-fuchsia-500' },
+              { icon: Timer, label: 'Timer', value: '30s', tone: 'text-amber-100', bar: 'from-amber-300 to-orange-500' },
+              { icon: Zap, label: 'Combo', value: '0x', tone: 'text-emerald-100', bar: 'from-emerald-300 to-cyan-400' },
+            ].map((item) => {
+              const Icon = item.icon;
+              return (
+                <span
+                  key={item.label}
+                  className="group min-w-[118px] rounded-lg border border-white/14 bg-white/10 px-3 py-2 shadow-[0_14px_34px_rgba(0,0,0,0.28),inset_0_1px_0_rgba(255,255,255,0.14)] backdrop-blur-xl transition-transform duration-300 hover:-translate-y-1"
+                >
+                  <span className={`flex items-center justify-between gap-2 text-xs font-black uppercase tracking-[0.14em] ${item.tone}`}>
+                    <Icon className="h-4 w-4" />
+                    {item.value}
+                  </span>
+                  <span className="mt-2 block h-1.5 overflow-hidden rounded-full bg-white/10">
+                    <span className={`block h-full rounded-full bg-gradient-to-r ${item.bar} transition-all duration-700 group-hover:w-full w-2/3`} />
+                  </span>
+                  <span className="mt-1 block text-[10px] font-bold uppercase tracking-[0.16em] text-slate-300">{item.label}</span>
+                </span>
+              );
+            })}
           </div>
+        </div>
+      </div>
+      <div className="group absolute inset-x-0 top-0 z-30 h-9">
+        <div className="mx-auto mt-2 w-fit translate-y-[-120%] rounded-full border border-white/10 bg-slate-950/70 px-3 py-1 text-xs font-black uppercase tracking-[0.18em] text-blue-100 opacity-0 shadow-lg backdrop-blur-xl transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100">
+          {lecture.shortTitle} Arena
         </div>
       </div>
       {gameUrl ? (
         <iframe
           title={`${lecture.shortTitle} Boss Fight`}
           src={gameUrl}
-          className="h-full w-full border-0"
+          className={`relative z-10 h-full w-full border-0 transition-transform duration-1000 ease-out ${gameMode ? 'scale-[1.012]' : 'scale-100'}`}
           allow="autoplay; fullscreen"
         />
       ) : (
