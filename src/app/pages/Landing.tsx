@@ -78,7 +78,7 @@ export function Landing() {
             <a href="#faq" className="hover:text-white">FAQ</a>
           </div>
 
-          <Button onClick={() => navigate('/login')} className="gsl-ripple rounded-md bg-white text-slate-950 hover:bg-blue-50">
+          <Button className="gsl-ripple rounded-md bg-white text-slate-950 hover:bg-blue-50">
             Sign In
           </Button>
         </nav>
