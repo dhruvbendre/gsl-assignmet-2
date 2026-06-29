@@ -8,6 +8,13 @@ import { ArrowLeft, Heart, Shield, Skull, Timer, Trophy, Zap } from 'lucide-reac
 
 const GAME_SAVE_KEY = 'stemEscapeRoomSave';
 const GAME_CONTEXT_KEY = 'stem-boss-fight-context';
+const BOSS_FIGHT_THEME_SRC = '/assets/audio/boss-fight-theme.mp3';
+const BOSS_FIGHT_THEME_VOLUME = 0.25;
+const BOSS_FIGHT_THEME_FADE_MS = 1000;
+
+let bossFightTheme: HTMLAudioElement | null = null;
+let bossFightThemeFade: number | undefined;
+let bossFightThemeSession = 0;
 
 interface BossFightContext {
   attemptId: string;
@@ -16,6 +23,58 @@ interface BossFightContext {
   userId?: string;
   startedAt: number;
   callbackPath: string;
+}
+
+function getBossFightTheme() {
+  if (!bossFightTheme) {
+    bossFightTheme = new Audio(BOSS_FIGHT_THEME_SRC);
+    bossFightTheme.loop = true;
+    bossFightTheme.preload = 'auto';
+    bossFightTheme.volume = 0;
+    bossFightTheme.load();
+  }
+
+  return bossFightTheme;
+}
+
+function fadeBossFightTheme(targetVolume: number, onComplete?: () => void) {
+  const audio = getBossFightTheme();
+  const startVolume = audio.volume;
+  const startedAt = performance.now();
+
+  window.clearInterval(bossFightThemeFade);
+  bossFightThemeFade = window.setInterval(() => {
+    const progress = Math.min((performance.now() - startedAt) / BOSS_FIGHT_THEME_FADE_MS, 1);
+    audio.volume = startVolume + (targetVolume - startVolume) * progress;
+
+    if (progress >= 1) {
+      window.clearInterval(bossFightThemeFade);
+      bossFightThemeFade = undefined;
+      onComplete?.();
+    }
+  }, 50);
+}
+
+function startBossFightTheme() {
+  const session = ++bossFightThemeSession;
+  const audio = getBossFightTheme();
+  audio.pause();
+  audio.currentTime = 0;
+  audio.volume = 0;
+  audio.play().then(() => {
+    if (session !== bossFightThemeSession) return;
+    fadeBossFightTheme(BOSS_FIGHT_THEME_VOLUME);
+  }).catch(() => {});
+}
+
+function stopBossFightTheme() {
+  if (!bossFightTheme) return;
+
+  bossFightThemeSession += 1;
+  fadeBossFightTheme(0, () => {
+    bossFightTheme?.pause();
+    if (bossFightTheme) bossFightTheme.currentTime = 0;
+  });
 }
 
 export function BossFight() {
@@ -71,6 +130,13 @@ export function BossFight() {
     setGameMode(false);
     const timer = window.setTimeout(() => setGameMode(true), 7600);
     return () => window.clearTimeout(timer);
+  }, [gameUrl]);
+
+  useEffect(() => {
+    if (!gameUrl) return;
+
+    startBossFightTheme();
+    return () => stopBossFightTheme();
   }, [gameUrl]);
 
   if (!lecture) {

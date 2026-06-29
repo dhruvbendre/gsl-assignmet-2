@@ -244,28 +244,28 @@ export function Dashboard() {
   const missionStory = `Sprouty the plant is counting on your engineering team. Mission ${currentChapter.number} teaches the sensor, circuit, or code decision needed to keep the smart garden alive.`;
 
   return (
-    <div className="gsl-platform min-h-screen bg-[#F8FAFC] text-slate-900">
+    <div className="gsl-platform lecture-learning-dashboard min-h-screen bg-[#F8FAFC] text-slate-900">
       <div className="pointer-events-none fixed inset-0 gsl-circuit opacity-50" />
       {/* Header */}
       <header className="sticky top-0 z-40 border-b border-white/10 bg-slate-950/90 shadow-lg backdrop-blur-xl">
-        <div className="max-w-7xl mx-auto px-4 py-4">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-4">
+        <div className="lecture-dashboard-header-inner max-w-7xl mx-auto px-4 py-4">
+          <div className="lecture-dashboard-header-row flex items-center justify-between">
+            <div className="lecture-dashboard-title-row flex items-center gap-4">
               <Button
                 variant="ghost"
                 size="icon"
                 onClick={() => setSidebarOpen(!sidebarOpen)}
-                className="lg:hidden text-white hover:bg-white/20"
+                className="lecture-dashboard-menu-button lg:hidden text-white hover:bg-white/20"
               >
                 {sidebarOpen ? <X /> : <Menu />}
               </Button>
-              <div>
-                <h1 className="gsl-display text-2xl font-black text-white">{course.title}</h1>
-                <p className="text-blue-100 text-sm font-medium">Mission {currentChapter.number}: {currentChapter.title}</p>
+              <div className="lecture-dashboard-title-copy">
+                <h1 className="lecture-dashboard-course-title gsl-display text-2xl font-black text-white">{course.title}</h1>
+                <p className="lecture-dashboard-mission-title text-blue-100 text-sm font-medium">Mission {currentChapter.number}: {currentChapter.title}</p>
               </div>
             </div>
             
-            <div className="flex items-center gap-2">
+            <div className="lecture-dashboard-actions flex items-center gap-2">
               <div className="hidden md:flex items-center gap-2 rounded-md bg-white/10 backdrop-blur-sm px-4 py-2">
                 <Zap className="w-5 h-5 text-yellow-300" />
                 <span className="text-white font-bold">{progress?.totalXP || 0} XP</span>
@@ -308,8 +308,8 @@ export function Dashboard() {
           </div>
 
           {/* Progress Bar */}
-          <div className="mt-4">
-            <div className="flex items-center justify-between mb-2">
+          <div className="lecture-dashboard-progress mt-4">
+            <div className="lecture-dashboard-progress-labels flex items-center justify-between mb-2">
               <span className="text-sm text-teal-100">Course Progress</span>
               <span className="text-sm font-bold text-white">{Math.round(progressPercentage)}%</span>
             </div>
@@ -318,13 +318,13 @@ export function Dashboard() {
         </div>
       </header>
 
-      <div className="relative max-w-7xl mx-auto px-4 py-6">
+      <div className="lecture-dashboard-shell relative max-w-7xl mx-auto px-4 py-6">
         {/* Back to Dashboard Button */}
         <div className="mb-4">
           <Button
             variant="ghost"
             onClick={() => navigate('/dashboard')}
-            className="rounded-md text-slate-600 hover:text-blue-700 hover:bg-blue-50"
+            className="lecture-dashboard-back-button rounded-md text-slate-600 hover:text-blue-700 hover:bg-blue-50"
             size="sm"
           >
             <ArrowLeft className="w-4 h-4 mr-2" />
@@ -332,7 +332,7 @@ export function Dashboard() {
           </Button>
         </div>
 
-        <div className="flex gap-6">
+        <div className="lecture-dashboard-layout flex gap-6">
           {/* Sidebar - Chapters */}
           <AnimatePresence>
             {(sidebarOpen || !isMobile) && (
@@ -340,10 +340,10 @@ export function Dashboard() {
                 initial={{ x: -300, opacity: 0 }}
                 animate={{ x: 0, opacity: 1 }}
                 exit={{ x: -300, opacity: 0 }}
-                className="w-full lg:w-80 flex-shrink-0 fixed lg:static inset-y-0 left-0 z-30 lg:z-0 bg-white lg:bg-transparent"
+                className="lecture-dashboard-sidebar w-full lg:w-80 flex-shrink-0 fixed lg:static inset-y-0 left-0 z-30 lg:z-0 bg-white lg:bg-transparent"
               >
-                <ScrollArea className="h-[calc(100vh-200px)] lg:h-auto">
-                  <Card className="rounded-lg border-slate-200 p-4 shadow-xl shadow-slate-200/70">
+                <ScrollArea className="lecture-dashboard-roadmap-scroll h-[calc(100vh-200px)] lg:h-auto">
+                  <Card className="lecture-dashboard-roadmap-card rounded-lg border-slate-200 p-4 shadow-xl shadow-slate-200/70">
                     <h2 className="gsl-subhead text-lg font-extrabold text-slate-950 mb-4 flex items-center gap-2">
                       <BookOpen className="w-5 h-5" />
                       Mission Roadmap
@@ -361,7 +361,7 @@ export function Dashboard() {
                             whileTap={unlocked ? { scale: 0.98 } : {}}
                             onClick={() => selectChapter(chapter)}
                             disabled={!unlocked}
-                            className={`w-full text-left p-3 rounded-lg transition-all ${
+                            className={`lecture-dashboard-chapter-button w-full text-left p-3 rounded-lg transition-all ${
                               isCurrent
                                 ? 'bg-gradient-to-r from-blue-600 to-violet-600 text-white shadow-lg'
                                 : unlocked
@@ -440,17 +440,17 @@ export function Dashboard() {
           </AnimatePresence>
 
           {/* Main Content - Lesson */}
-          <div className="flex-1 min-w-0">
-            <Card className="overflow-hidden rounded-lg border-slate-200 p-0 shadow-xl shadow-slate-200/80">
+          <div className="lecture-dashboard-main flex-1 min-w-0">
+            <Card className="lecture-dashboard-lesson-card overflow-hidden rounded-lg border-slate-200 p-0 shadow-xl shadow-slate-200/80">
               <motion.div
                 key={currentChapter.id}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.3 }}
               >
-                <div className="relative bg-slate-950 p-6 text-white lg:p-8">
+                <div className="lecture-dashboard-lesson-hero relative bg-slate-950 p-6 text-white lg:p-8">
                   <div className="absolute inset-0 gsl-circuit opacity-30" />
-                  <div className="relative grid gap-5 md:grid-cols-[1fr_auto] md:items-start">
+                  <div className="lecture-dashboard-lesson-hero-grid relative grid gap-5 md:grid-cols-[1fr_auto] md:items-start">
                     <div>
                       <Badge className="mb-3 rounded-md bg-blue-500/20 text-blue-100 hover:bg-blue-500/20">
                         Mission {currentChapter.number} • {currentChapter.quiz.xpReward} XP checkpoint
@@ -541,7 +541,7 @@ export function Dashboard() {
             </Card>
 
             {/* Mobile Quiz Section */}
-            <Card className="p-6 shadow-xl mt-6 xl:hidden">
+            <Card className="lecture-dashboard-mobile-quiz p-6 shadow-xl mt-6 xl:hidden">
               <h2 className="text-lg font-bold text-teal-700 mb-4 flex items-center gap-2">
                 <Target className="w-5 h-5" />
                 Chapter Quiz
